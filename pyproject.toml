@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-eval-harness"
+version = "0.1.0"
+description = "Lightweight toolkit for benchmarking and evaluating LLM outputs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["click>=8.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+harness = "eval_harness.cli:harness"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["eval_harness*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
