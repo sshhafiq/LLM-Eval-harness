@@ -1,0 +1,50 @@
+{"id": "qa-001", "input": "What is the capital of France?", "reference": "Paris", "metadata": {"topic": "geography"}}
+{"id": "qa-002", "input": "What is 7 multiplied by 8?", "reference": "56", "metadata": {"topic": "math"}}
+{"id": "qa-003", "input": "Who wrote 'Romeo and Juliet'?", "reference": "William Shakespeare", "metadata": {"topic": "literature"}}
+{"id": "qa-004", "input": "What is the chemical symbol for water?", "reference": "H2O", "metadata": {"topic": "science"}}
+{"id": "qa-005", "input": "How many days are in a leap year?", "reference": "366", "metadata": {"topic": "general"}}
+{"id": "qa-006", "input": "What planet is known as the Red Planet?", "reference": "Mars", "metadata": {"topic": "science"}}
+{"id": "qa-007", "input": "What is 15% of 200?", "reference": "30", "metadata": {"topic": "math"}}
+{"id": "qa-008", "input": "In which year did the Titanic sink?", "reference": "1912", "metadata": {"topic": "history"}}
+{"id": "qa-009", "input": "What is the largest ocean on Earth?", "reference": "Pacific Ocean", "metadata": {"topic": "geography"}}
+{"id": "qa-010", "input": "What does CPU stand for?", "reference": "Central Processing Unit", "metadata": {"topic": "tech"}}
+{"id": "qa-011", "input": "How many sides does a hexagon have?", "reference": "6", "metadata": {"topic": "math"}}
+{"id": "qa-012", "input": "What is the boiling point of water in Celsius?", "reference": "100", "metadata": {"topic": "science"}}
+{"id": "qa-013", "input": "Who painted the Mona Lisa?", "reference": "Leonardo da Vinci", "metadata": {"topic": "art"}}
+{"id": "qa-014", "input": "What is the capital of Japan?", "reference": "Tokyo", "metadata": {"topic": "geography"}}
+{"id": "qa-015", "input": "What is 9 squared?", "reference": "81", "metadata": {"topic": "math"}}
+{"id": "qa-016", "input": "Which gas do plants absorb from the atmosphere?", "reference": "Carbon dioxide", "metadata": {"topic": "science"}}
+{"id": "qa-017", "input": "How many continents are there?", "reference": "7", "metadata": {"topic": "geography"}}
+{"id": "qa-018", "input": "What is the currency of the United Kingdom?", "reference": "Pound sterling", "metadata": {"topic": "general"}}
+{"id": "qa-019", "input": "Who was the first person to walk on the Moon?", "reference": "Neil Armstrong", "metadata": {"topic": "history"}}
+{"id": "qa-020", "input": "What is the square root of 144?", "reference": "12", "metadata": {"topic": "math"}}
+{"id": "qa-021", "input": "What does HTTP stand for?", "reference": "Hypertext Transfer Protocol", "metadata": {"topic": "tech"}}
+{"id": "qa-022", "input": "Which planet is closest to the Sun?", "reference": "Mercury", "metadata": {"topic": "science"}}
+{"id": "qa-023", "input": "In which year did World War II end?", "reference": "1945", "metadata": {"topic": "history"}}
+{"id": "qa-024", "input": "What is the largest desert in the world?", "reference": "Antarctic Desert", "metadata": {"topic": "geography"}}
+{"id": "qa-025", "input": "How many minutes are in an hour?", "reference": "60", "metadata": {"topic": "general"}}
+{"id": "qa-026", "input": "What is the chemical symbol for gold?", "reference": "Au", "metadata": {"topic": "science"}}
+{"id": "qa-027", "input": "Who wrote '1984'?", "reference": "George Orwell", "metadata": {"topic": "literature"}}
+{"id": "qa-028", "input": "What is 12 times 12?", "reference": "144", "metadata": {"topic": "math"}}
+{"id": "qa-029", "input": "What is the capital of Australia?", "reference": "Canberra", "metadata": {"topic": "geography"}}
+{"id": "qa-030", "input": "How many players are on a soccer team on the field?", "reference": "11", "metadata": {"topic": "sports"}}
+{"id": "qa-031", "input": "What does DNA stand for?", "reference": "Deoxyribonucleic acid", "metadata": {"topic": "science"}}
+{"id": "qa-032", "input": "Which ocean is the smallest?", "reference": "Arctic Ocean", "metadata": {"topic": "geography"}}
+{"id": "qa-033", "input": "What is 100 divided by 4?", "reference": "25", "metadata": {"topic": "math"}}
+{"id": "qa-034", "input": "Who invented the telephone?", "reference": "Alexander Graham Bell", "metadata": {"topic": "history"}}
+{"id": "qa-035", "input": "What is the hardest natural substance on Earth?", "reference": "Diamond", "metadata": {"topic": "science"}}
+{"id": "qa-036", "input": "How many colors are in a rainbow?", "reference": "7", "metadata": {"topic": "general"}}
+{"id": "qa-037", "input": "What is the capital of Canada?", "reference": "Ottawa", "metadata": {"topic": "geography"}}
+{"id": "qa-038", "input": "What is 3 to the power of 4?", "reference": "81", "metadata": {"topic": "math"}}
+{"id": "qa-039", "input": "Which language has the most native speakers?", "reference": "Mandarin Chinese", "metadata": {"topic": "general"}}
+{"id": "qa-040", "input": "What does RAM stand for?", "reference": "Random Access Memory", "metadata": {"topic": "tech"}}
+{"id": "qa-041", "input": "How many legs does a spider have?", "reference": "8", "metadata": {"topic": "science"}}
+{"id": "qa-042", "input": "In which year did the Berlin Wall fall?", "reference": "1989", "metadata": {"topic": "history"}}
+{"id": "qa-043", "input": "What is the longest river in the world?", "reference": "Nile", "metadata": {"topic": "geography"}}
+{"id": "qa-044", "input": "What is 5 factorial (5!)?", "reference": "120", "metadata": {"topic": "math"}}
+{"id": "qa-045", "input": "Who wrote 'To Kill a Mockingbird'?", "reference": "Harper Lee", "metadata": {"topic": "literature"}}
+{"id": "qa-046", "input": "What is the speed of light in vacuum (km/s)?", "reference": "300000", "metadata": {"topic": "science"}}
+{"id": "qa-047", "input": "How many states are in the United States?", "reference": "50", "metadata": {"topic": "geography"}}
+{"id": "qa-048", "input": "What does AI stand for?", "reference": "Artificial Intelligence", "metadata": {"topic": "tech"}}
+{"id": "qa-049", "input": "What is the freezing point of water in Fahrenheit?", "reference": "32", "metadata": {"topic": "science"}}
+{"id": "qa-050", "input": "Which city hosted the 2016 Summer Olympics?", "reference": "Rio de Janeiro", "metadata": {"topic": "sports"}}
