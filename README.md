@@ -36,6 +36,9 @@ JSONL dataset ──▶ runner ──▶ per-example predictions ──▶ metri
 | `eval_harness/report.py` | Self-contained HTML reports — tables plus inline SVG bar charts, zero external assets |
 | `eval_harness/cli.py` | `harness run` / `harness compare` command-line interface |
 
+Note: `bleu` uses no smoothing — a zero clipped precision at any order scores
+0.0, and n-gram orders longer than the prediction are skipped, not counted.
+
 ## Quickstart
 
 ```bash
