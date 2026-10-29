@@ -49,6 +49,20 @@ harness run --dataset examples/qa_sample.jsonl --model echo \
 python examples/run_example.py
 ```
 
+## Dataset format
+
+Each line of the JSONL dataset is one example with three required fields
+and one optional field:
+
+```json
+{"id": "q1", "input": "What is the capital of France?", "reference": "Paris", "metadata": {"topic": "geography"}}
+```
+
+`id`, `input`, and `reference` are required; `metadata` is optional and
+passed through untouched. A line missing a required field fails fast with
+the file name and line number, rather than scoring silently against an
+empty reference.
+
 Example output (`harness run`):
 
 ```
