@@ -80,6 +80,20 @@ class TestBleu:
     def test_empty_prediction(self):
         assert bleu("", "hello world").score == 0.0
 
+    def test_short_prediction_skips_missing_orders(self):
+        # Pred "the cat" (2 tokens) vs ref "the cat sat" (3 tokens): only
+        # unigram and bigram orders apply, both precision 1.0, so the score
+        # is just the brevity penalty exp(1 - 3/2).
+        result = bleu("the cat", "the cat sat")
+        assert result.score == pytest.approx(math.exp(-0.5))
+        assert result.details["precisions"] == pytest.approx([1.0, 1.0])
+
+    def test_max_n_limits_orders(self):
+        # Unigram-only BLEU ignores word order: same tokens, shuffled, is 1.0.
+        result = bleu("cat the sat", "the cat sat", max_n=1)
+        assert result.score == pytest.approx(1.0)
+        assert result.details["precisions"] == pytest.approx([1.0])
+
     def test_partial_overlap_between_zero_and_one(self):
         # Every n-gram order 1..4 has nonzero clipped precision here, and both
         # strings are 6 tokens, so BP = 1 and 0 < BLEU < 1.
