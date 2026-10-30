@@ -163,6 +163,8 @@ def bleu(prediction: str, reference: str, max_n: int = 4) -> MetricResult:
     zero clipped precision yields a score of 0.0 (no smoothing), matching the
     reference BLEU behavior for degenerate outputs.
     """
+    if max_n < 1:
+        raise ValueError("max_n must be at least 1")
     p_toks, r_toks = tokenize(prediction), tokenize(reference)
     if not p_toks or not r_toks:
         return MetricResult(name="bleu", score=0.0, details={"precisions": []})
