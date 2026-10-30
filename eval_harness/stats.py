@@ -7,6 +7,7 @@ library:
 - :func:`paired_permutation_test` — exact-ish paired test for whether two
   per-example score lists have different means.
 - :func:`win_rate` — head-to-head win/tie/loss counts for two score lists.
+- :func:`summarize` — mean, median, stdev, min, and max of one score list.
 """
 
 from __future__ import annotations
