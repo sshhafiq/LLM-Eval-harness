@@ -50,6 +50,13 @@ class TestRougeL:
     def test_no_overlap_is_zero(self):
         assert rouge_l("aaa bbb", "ccc ddd").score == 0.0
 
+    def test_partial_overlap_between_zero_and_one(self):
+        # pred tokens: the cat sat (3); ref tokens: the cat ran fast (4)
+        # LCS: the cat -> 2; P = 2/3, R = 2/4, F1 = 4/7
+        result = rouge_l("the cat sat", "the cat ran fast")
+        assert result.score == pytest.approx(4 / 7)
+        assert result.details["lcs"] == 2
+
     def test_empty_prediction(self):
         assert rouge_l("", "hello").score == 0.0
 
