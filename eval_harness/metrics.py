@@ -131,9 +131,18 @@ def _ngrams(tokens: list[str], n: int) -> list[tuple[str, ...]]:
 
 
 def exact_match(prediction: str, reference: str) -> MetricResult:
-    """1.0 when prediction matches reference after normalization, else 0.0."""
-    score = 1.0 if normalize(prediction) == normalize(reference) else 0.0
-    return MetricResult(name="exact_match", score=score)
+    """1.0 when prediction matches reference after normalization, else 0.0.
+
+    The normalized strings are included in ``details`` so a mismatch in a
+    report can be inspected without re-running the normalization.
+    """
+    norm_pred, norm_ref = normalize(prediction), normalize(reference)
+    score = 1.0 if norm_pred == norm_ref else 0.0
+    return MetricResult(
+        name="exact_match",
+        score=score,
+        details={"prediction": norm_pred, "reference": norm_ref},
+    )
 
 
 def rouge_l(prediction: str, reference: str) -> MetricResult:
