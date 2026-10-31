@@ -14,6 +14,7 @@ from eval_harness.metrics import (
     length_stats,
     list_metrics,
     llm_judge_metric,
+    normalize,
     register_metric,
     rouge_l,
 )
@@ -31,6 +32,15 @@ class TestExactMatch:
 
     def test_name(self):
         assert exact_match("a", "a").name == "exact_match"
+
+
+class TestNormalize:
+    def test_strips_punctuation_and_case(self):
+        assert normalize("  Hello,  WORLD! ") == "hello world"
+
+    def test_bleu_rejects_nonpositive_max_n(self):
+        with pytest.raises(ValueError, match="max_n"):
+            bleu("hello world", "hello world", max_n=0)
 
 
 class TestRougeL:
