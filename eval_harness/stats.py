@@ -105,13 +105,33 @@ def win_rate(a: Sequence[float], b: Sequence[float]) -> dict:
     }
 
 
+def cohens_d(a: Sequence[float], b: Sequence[float]) -> float:
+    """Standardized mean difference of two independent score lists.
+
+    Uses the pooled standard deviation. Returns 0.0 when both lists are
+    constant (no variance to standardize by) instead of dividing by zero.
+    Positive values mean ``a`` scores higher on average than ``b``.
+    """
+    a, b = list(a), list(b)
+    if not a or not b:
+        raise ValueError("inputs must be non-empty")
+    n_a, n_b = len(a), len(b)
+    var_a = statistics.variance(a) if n_a > 1 else 0.0
+    var_b = statistics.variance(b) if n_b > 1 else 0.0
+    pooled = ((n_a - 1) * var_a + (n_b - 1) * var_b) / max(1, n_a + n_b - 2)
+    if pooled <= 0.0:
+        return 0.0
+    return (statistics.mean(a) - statistics.mean(b)) / (pooled ** 0.5)
+
+
 def summarize(values: Sequence[float]) -> dict:
-    """Mean, standard deviation, min, max, and count for a score list."""
+    """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
     if not values:
         raise ValueError("values must be non-empty")
     return {
         "mean": statistics.mean(values),
+        "median": statistics.median(values),
         "stdev": statistics.stdev(values) if len(values) > 1 else 0.0,
         "min": min(values),
         "max": max(values),
