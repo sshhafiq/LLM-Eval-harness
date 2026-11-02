@@ -17,6 +17,7 @@ from eval_harness.metrics import (
     normalize,
     register_metric,
     rouge_l,
+    token_f1,
 )
 
 
@@ -32,6 +33,10 @@ class TestExactMatch:
 
     def test_name(self):
         assert exact_match("a", "a").name == "exact_match"
+
+    def test_details_carry_normalized_strings(self):
+        result = exact_match("  PARIS! ", "London")
+        assert result.details == {"prediction": "paris", "reference": "london"}
 
 
 class TestNormalize:
@@ -192,3 +197,29 @@ class TestRegistry:
 
         register_metric("always_half", AlwaysHalf())
         assert get_metric("always_half")("a", "b").score == 0.5
+
+
+class TestTokenF1:
+    def test_identical_is_one(self):
+        result = token_f1("the cat sat", "the cat sat")
+        assert result.score == 1.0
+        assert result.details["precision"] == 1.0
+        assert result.details["recall"] == 1.0
+
+    def test_partial_overlap(self):
+        result = token_f1("the cat sat", "the dog sat")
+        assert result.details["overlap"] == 2
+        assert result.score == pytest.approx(2 / 3)
+
+    def test_no_overlap_is_zero(self):
+        assert token_f1("aaa bbb", "ccc ddd").score == 0.0
+
+    def test_empty_both_is_one(self):
+        assert token_f1("", "").score == 1.0
+
+    def test_empty_prediction_is_zero(self):
+        assert token_f1("", "some words").score == 0.0
+
+    def test_registered_as_builtin(self):
+        assert "token_f1" in list_metrics()
+        assert get_metric("token_f1").name == "token_f1"
