@@ -8,6 +8,7 @@ library:
   per-example score lists have different means.
 - :func:`win_rate` — head-to-head win/tie/loss counts for two score lists.
 - :func:`summarize` — mean, median, stdev, min, and max of one score list.
+- :func:`percentile` — a single percentile of one score list.
 """
 
 from __future__ import annotations
@@ -122,6 +123,26 @@ def cohens_d(a: Sequence[float], b: Sequence[float]) -> float:
     if pooled <= 0.0:
         return 0.0
     return (statistics.mean(a) - statistics.mean(b)) / (pooled ** 0.5)
+
+
+def percentile(values: Sequence[float], p: float) -> float:
+    """The ``p``-th percentile of ``values`` (0 <= p <= 100).
+
+    Uses linear interpolation between the closest ranks, the same method
+    as the default in numpy. A single value returns itself for any ``p``.
+    """
+    values = sorted(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0.0 <= p <= 100.0:
+        raise ValueError("p must be in [0, 100]")
+    if len(values) == 1:
+        return float(values[0])
+    rank = (p / 100.0) * (len(values) - 1)
+    low = int(rank)
+    high = min(low + 1, len(values) - 1)
+    frac = rank - low
+    return float(values[low] + (values[high] - values[low]) * frac)
 
 
 def summarize(values: Sequence[float]) -> dict:
