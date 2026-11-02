@@ -9,6 +9,7 @@ library:
 - :func:`win_rate` — head-to-head win/tie/loss counts for two score lists.
 - :func:`summarize` — mean, median, stdev, min, and max of one score list.
 - :func:`percentile` — a single percentile of one score list.
+- :func:`interquartile_range` — spread between the 25th and 75th percentiles.
 """
 
 from __future__ import annotations
@@ -143,6 +144,18 @@ def percentile(values: Sequence[float], p: float) -> float:
     high = min(low + 1, len(values) - 1)
     frac = rank - low
     return float(values[low] + (values[high] - values[low]) * frac)
+
+
+def interquartile_range(values: Sequence[float]) -> float:
+    """Difference between the 75th and 25th percentiles of ``values``.
+
+    A robust spread measure that ignores outliers in either tail. A
+    single value (or a constant list) has an IQR of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return percentile(values, 75) - percentile(values, 25)
 
 
 def summarize(values: Sequence[float]) -> dict:
