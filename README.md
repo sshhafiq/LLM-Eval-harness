@@ -28,7 +28,7 @@ JSONL dataset ──▶ runner ──▶ per-example predictions ──▶ metri
 
 | Module | Responsibility |
 |---|---|
-| `eval_harness/metrics.py` | Pluggable metric registry: `exact_match`, `rouge_l`, `bleu` (from scratch), `json_validity`, `length_stats`, and `llm_as_judge` with a `JudgeBackend` protocol + deterministic `MockJudge` |
+| `eval_harness/metrics.py` | Pluggable metric registry: `exact_match`, `rouge_l`, `bleu` and `token_f1` (from scratch), `json_validity`, `length_stats`, and `llm_as_judge` with a `JudgeBackend` protocol + deterministic `MockJudge` |
 | `eval_harness/datasets.py` | JSONL loading with validation, deterministic sampling, train/test splits |
 | `eval_harness/runner.py` | Parallel experiment runner over any `ModelFn`; ships mock models (`EchoModel`, `ConstantModel`, `ReverseModel`) |
 | `eval_harness/stats.py` | Bootstrap confidence intervals, paired permutation tests, pairwise win rates |
