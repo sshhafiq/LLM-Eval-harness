@@ -208,6 +208,31 @@ def bleu(prediction: str, reference: str, max_n: int = 4) -> MetricResult:
     )
 
 
+def token_f1(prediction: str, reference: str) -> MetricResult:
+    """Token-level F1 over normalized tokens (bag-of-words overlap).
+
+    Precision is the share of prediction tokens found in the reference and
+    recall the share of reference tokens found in the prediction, counting
+    duplicates via multiset intersection.  Empty on both sides scores 1.0;
+    empty on exactly one side scores 0.0.
+    """
+    p_counts = Counter(normalize(prediction).split())
+    r_counts = Counter(normalize(reference).split())
+    overlap = sum((p_counts & r_counts).values())
+    p_total, r_total = sum(p_counts.values()), sum(r_counts.values())
+    if p_total == 0 and r_total == 0:
+        return MetricResult(name="token_f1", score=1.0,
+                            details={"precision": 1.0, "recall": 1.0})
+    precision = overlap / p_total if p_total else 0.0
+    recall = overlap / r_total if r_total else 0.0
+    score = (2 * precision * recall / (precision + recall)
+             if precision + recall else 0.0)
+    return MetricResult(
+        name="token_f1", score=score,
+        details={"precision": precision, "recall": recall, "overlap": overlap},
+    )
+
+
 def json_validity(prediction: str, reference: str) -> MetricResult:
     """1.0 if ``prediction`` parses as JSON, else 0.0.
 
@@ -320,3 +345,4 @@ register_metric("rouge_l", _FnMetric("rouge_l", rouge_l))
 register_metric("bleu", _FnMetric("bleu", bleu))
 register_metric("json_validity", _FnMetric("json_validity", json_validity))
 register_metric("length_stats", _FnMetric("length_stats", length_stats))
+register_metric("token_f1", _FnMetric("token_f1", token_f1))
