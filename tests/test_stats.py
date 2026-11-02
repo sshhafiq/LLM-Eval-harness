@@ -4,6 +4,7 @@ import pytest
 
 from eval_harness.stats import (
     bootstrap_ci,
+    cohens_d,
     paired_permutation_test,
     summarize,
     win_rate,
@@ -83,3 +84,16 @@ def test_summarize():
 
 def test_summarize_single_value():
     assert summarize([5.0])["stdev"] == 0.0
+
+
+def test_summarize_median():
+    assert summarize([1.0, 2.0, 3.0, 4.0])["median"] == pytest.approx(2.5)
+    assert summarize([1.0, 2.0, 3.0])["median"] == pytest.approx(2.0)
+
+
+def test_cohens_d_positive_and_constant():
+    assert cohens_d([2.0, 3.0, 4.0], [1.0, 2.0, 3.0]) == pytest.approx(1.0)
+    assert cohens_d([1.0, 2.0, 3.0], [2.0, 3.0, 4.0]) == pytest.approx(-1.0)
+    assert cohens_d([0.5, 0.5], [0.5, 0.5]) == 0.0
+    with pytest.raises(ValueError, match="non-empty"):
+        cohens_d([], [1.0])
