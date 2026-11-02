@@ -6,6 +6,7 @@ from eval_harness.stats import (
     bootstrap_ci,
     cohens_d,
     paired_permutation_test,
+    percentile,
     summarize,
     win_rate,
 )
@@ -97,3 +98,21 @@ def test_cohens_d_positive_and_constant():
     assert cohens_d([0.5, 0.5], [0.5, 0.5]) == 0.0
     with pytest.raises(ValueError, match="non-empty"):
         cohens_d([], [1.0])
+
+
+def test_percentile_endpoints_and_median():
+    values = [1.0, 2.0, 3.0, 4.0]
+    assert percentile(values, 0) == pytest.approx(1.0)
+    assert percentile(values, 100) == pytest.approx(4.0)
+    assert percentile(values, 50) == pytest.approx(2.5)
+    assert percentile([5.0], 90) == pytest.approx(5.0)
+
+
+def test_percentile_interpolates_and_validates():
+    assert percentile([0.0, 10.0], 25) == pytest.approx(2.5)
+    # Input order does not matter.
+    assert percentile([4.0, 1.0, 3.0, 2.0], 50) == pytest.approx(2.5)
+    with pytest.raises(ValueError):
+        percentile([], 50)
+    with pytest.raises(ValueError):
+        percentile([1.0], 101)
