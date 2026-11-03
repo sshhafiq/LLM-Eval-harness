@@ -10,6 +10,7 @@ library:
 - :func:`summarize` — mean, median, stdev, min, and max of one score list.
 - :func:`percentile` — a single percentile of one score list.
 - :func:`interquartile_range` — spread between the 25th and 75th percentiles.
+- :func:`median_absolute_deviation` — median distance from the median.
 """
 
 from __future__ import annotations
@@ -156,6 +157,20 @@ def interquartile_range(values: Sequence[float]) -> float:
     if not values:
         raise ValueError("values must be non-empty")
     return percentile(values, 75) - percentile(values, 25)
+
+
+def median_absolute_deviation(values: Sequence[float]) -> float:
+    """Median of the absolute deviations from the median of ``values``.
+
+    A robust spread measure: unlike the standard deviation it barely
+    moves when a single outlier lands in the tail. A single value (or a
+    constant list) has a MAD of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    med = statistics.median(values)
+    return float(statistics.median([abs(v - med) for v in values]))
 
 
 def summarize(values: Sequence[float]) -> dict:
