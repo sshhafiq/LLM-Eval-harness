@@ -6,6 +6,7 @@ from eval_harness.stats import (
     bootstrap_ci,
     cohens_d,
     interquartile_range,
+    median_absolute_deviation,
     paired_permutation_test,
     percentile,
     summarize,
@@ -117,6 +118,16 @@ def test_interquartile_range():
     assert interquartile_range([1.0, 2.0, 3.0, 4.0, 100.0]) == pytest.approx(2.0)
     with pytest.raises(ValueError):
         interquartile_range([])
+
+
+def test_median_absolute_deviation():
+    assert median_absolute_deviation([1.0, 2.0, 3.0, 4.0]) == pytest.approx(1.0)
+    assert median_absolute_deviation([5.0]) == pytest.approx(0.0)
+    assert median_absolute_deviation([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    # An outlier barely moves the MAD, unlike the standard deviation.
+    assert median_absolute_deviation([1.0, 2.0, 3.0, 4.0, 100.0]) == pytest.approx(1.0)
+    with pytest.raises(ValueError):
+        median_absolute_deviation([])
 
 
 def test_percentile_interpolates_and_validates():
