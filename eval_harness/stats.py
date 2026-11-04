@@ -12,6 +12,7 @@ library:
 - :func:`interquartile_range` — spread between the 25th and 75th percentiles.
 - :func:`median_absolute_deviation` — median distance from the median.
 - :func:`standard_error` — standard error of the mean of one score list.
+- :func:`coefficient_of_variation` — stdev relative to the mean of one list.
 """
 
 from __future__ import annotations
@@ -204,6 +205,24 @@ def standard_error(values: Sequence[float]) -> float:
     if len(values) == 1:
         return 0.0
     return float(statistics.stdev(values) / (len(values) ** 0.5))
+
+
+def coefficient_of_variation(values: Sequence[float]) -> float:
+    """Sample standard deviation of ``values`` divided by its mean.
+
+    A scale-free spread measure, handy for comparing score lists whose
+    means differ. A single value (or a constant list) returns 0.0, and
+    so does a list whose mean is 0, where the ratio is undefined.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return 0.0
+    mean = statistics.mean(values)
+    if mean == 0:
+        return 0.0
+    return float(statistics.stdev(values) / mean)
 
 
 def summarize(values: Sequence[float]) -> dict:
