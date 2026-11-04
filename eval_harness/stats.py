@@ -11,6 +11,7 @@ library:
 - :func:`percentile` — a single percentile of one score list.
 - :func:`interquartile_range` — spread between the 25th and 75th percentiles.
 - :func:`median_absolute_deviation` — median distance from the median.
+- :func:`standard_error` — standard error of the mean of one score list.
 """
 
 from __future__ import annotations
@@ -188,6 +189,21 @@ def trimmed_mean(values: Sequence[float], proportion: float = 0.1) -> float:
     k = int(len(values) * proportion)
     trimmed = values[k:len(values) - k] if k else values
     return float(statistics.mean(trimmed))
+
+
+def standard_error(values: Sequence[float]) -> float:
+    """Standard error of the mean of ``values``.
+
+    The sample standard deviation divided by the square root of the
+    count. A single value (or a constant list) has a standard error
+    of 0.0, since there is no measured spread to scale.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return 0.0
+    return float(statistics.stdev(values) / (len(values) ** 0.5))
 
 
 def summarize(values: Sequence[float]) -> dict:
