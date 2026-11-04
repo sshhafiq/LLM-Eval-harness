@@ -159,3 +159,14 @@ def test_trimmed_mean_validation():
         trimmed_mean([1.0, 2.0], 0.5)
     with pytest.raises(ValueError):
         trimmed_mean([1.0, 2.0], -0.1)
+
+
+def test_standard_error_scales_with_spread_and_count():
+    from eval_harness.stats import standard_error
+
+    # stdev of [1, 2, 3, 4] is about 1.291; divided by sqrt(4) = 2.
+    assert standard_error([1.0, 2.0, 3.0, 4.0]) == pytest.approx(0.6455, abs=1e-3)
+    assert standard_error([5.0]) == pytest.approx(0.0)
+    assert standard_error([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        standard_error([])
