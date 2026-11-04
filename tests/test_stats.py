@@ -161,6 +161,22 @@ def test_trimmed_mean_validation():
         trimmed_mean([1.0, 2.0], -0.1)
 
 
+def test_coefficient_of_variation_relative_spread():
+    from eval_harness.stats import coefficient_of_variation
+
+    # stdev of [1, 2, 3, 4] is about 1.291; divided by mean 2.5.
+    assert coefficient_of_variation([1.0, 2.0, 3.0, 4.0]) == pytest.approx(0.5164, abs=1e-3)
+    # Doubling every value doubles both stdev and mean, so CV is unchanged.
+    assert coefficient_of_variation([2.0, 4.0, 6.0, 8.0]) == pytest.approx(
+        coefficient_of_variation([1.0, 2.0, 3.0, 4.0])
+    )
+    assert coefficient_of_variation([5.0]) == pytest.approx(0.0)
+    assert coefficient_of_variation([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    assert coefficient_of_variation([-1.0, 1.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        coefficient_of_variation([])
+
+
 def test_standard_error_scales_with_spread_and_count():
     from eval_harness.stats import standard_error
 
