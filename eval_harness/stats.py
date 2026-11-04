@@ -1,1 +1,205 @@
-IiIiU3RhdGlzdGljYWwgaGVscGVycyBmb3IgY29tcGFyaW5nIGV4cGVyaW1lbnQgcmVzdWx0cy4KCkFsbCBmdW5jdGlvbnMgYXJlIGRldGVybWluaXN0aWMgZ2l2ZW4gYGBzZWVkYGAgYW5kIHVzZSBvbmx5IHRoZSBzdGFuZGFyZApsaWJyYXJ5OgoKLSA6ZnVuYzpgYm9vdHN0cmFwX2NpYCDigJQgcGVyY2VudGlsZSBib290c3RyYXAgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgYSBtZWFuLgotIDpmdW5jOmBwYWlyZWRfcGVybXV0YXRpb25fdGVzdGAg4oCUIGV4YWN0LWlzaCBwYWlyZWQgdGVzdCBmb3Igd2hldGhlciB0d28KICBwZXItZXhhbXBsZSBzY29yZSBsaXN0cyBoYXZlIGRpZmZlcmVudCBtZWFucy4KLSA6ZnVuYzpgd2luX3JhdGVgIOKAlCBoZWFkLXRvLWhlYWQgd2luL3RpZS9sb3NzIGNvdW50cyBmb3IgdHdvIHNjb3JlIGxpc3RzLgotIDpmdW5jOmBzdW1tYXJpemVgIOKAlCBtZWFuLCBtZWRpYW4sIHN0ZGV2LCBtaW4sIGFuZCBtYXggb2Ygb25lIHNjb3JlIGxpc3QuCi0gOmZ1bmM6YHBlcmNlbnRpbGVgIOKAlCBhIHNpbmdsZSBwZXJjZW50aWxlIG9mIG9uZSBzY29yZSBsaXN0LgotIDpmdW5jOmBpbnRlcnF1YXJ0aWxlX3JhbmdlYCDigJQgc3ByZWFkIGJldHdlZW4gdGhlIDI1dGggYW5kIDc1dGggcGVyY2VudGlsZXMuCi0gOmZ1bmM6YG1lZGlhbl9hYnNvbHV0ZV9kZXZpYXRpb25gIOKAlCBtZWRpYW4gZGlzdGFuY2UgZnJvbSB0aGUgbWVkaWFuLgoiIiIKCmZyb20gX19mdXR1cmVfXyBpbXBvcnQgYW5ub3RhdGlvbnMKCmltcG9ydCByYW5kb20KaW1wb3J0IHN0YXRpc3RpY3MKZnJvbSB0eXBpbmcgaW1wb3J0IExpc3QsIFNlcXVlbmNlCgoKZGVmIF9jaGVja19wYWlyZWQoYTogU2VxdWVuY2VbZmxvYXRdLCBiOiBTZXF1ZW5jZVtmbG9hdF0pIC0+IE5vbmU6CiAgICBpZiBsZW4oYSkgIT0gbGVuKGIpOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoZiJwYWlyZWQgaW5wdXRzIG11c3QgaGF2ZSBlcXVhbCBsZW5ndGggKHtsZW4oYSl9ICE9IHtsZW4oYil9KSIpCiAgICBpZiBub3QgYToKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJpbnB1dHMgbXVzdCBiZSBub24tZW1wdHkiKQoKCmRlZiBib290c3RyYXBfY2koCiAgICB2YWx1ZXM6IFNlcXVlbmNlW2Zsb2F0XSwKICAgIG5fcmVzYW1wbGVzOiBpbnQgPSAyMDAwLAogICAgY2k6IGZsb2F0ID0gMC45NSwKICAgIHNlZWQ6IGludCA9IDQyLAopIC0+IHR1cGxlW2Zsb2F0LCBmbG9hdF06CiAgICAiIiJQZXJjZW50aWxlIGJvb3RzdHJhcCBjb25maWRlbmNlIGludGVydmFsIGZvciB0aGUgbWVhbiBvZiBgYHZhbHVlc2BgLgoKICAgIFJlc2FtcGxlcyB3aXRoIHJlcGxhY2VtZW50IGBgbl9yZXNhbXBsZXNgYCB0aW1lcywgdGFrZXMgdGhlIG1lYW4gb2YgZWFjaAogICAgcmVzYW1wbGUsIGFuZCByZXR1cm5zIHRoZSBgYCgxIC0gY2kpIC8gMmBgIGFuZCBgYDEgLSAoMSAtIGNpKSAvIDJgYAogICAgcGVyY2VudGlsZXMuICBEZXRlcm1pbmlzdGljIGZvciBhIGZpeGVkIGBgc2VlZGBgLgogICAgIiIiCiAgICB2YWx1ZXMgPSBsaXN0KHZhbHVlcykKICAgIGlmIG5vdCB2YWx1ZXM6CiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigidmFsdWVzIG11c3QgYmUgbm9uLWVtcHR5IikKICAgIGlmIG5vdCAwLjAgPCBjaSA8IDEuMDoKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJjaSBtdXN0IGJlIGluICgwLCAxKSIpCiAgICBpZiBuX3Jlc2FtcGxlcyA8IDEwMDoKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJuX3Jlc2FtcGxlcyBtdXN0IGJlID49IDEwMCBmb3IgYSBzdGFibGUgaW50ZXJ2YWwiKQoKICAgIHJuZyA9IHJhbmRvbS5SYW5kb20oc2VlZCkKICAgIG4gPSBsZW4odmFsdWVzKQogICAgbWVhbnMgPSBzb3J0ZWQoCiAgICAgICAgc3RhdGlzdGljcy5tZWFuKHJuZy5jaG9pY2VzKHZhbHVlcywgaz1uKSkgZm9yIF8gaW4gcmFuZ2Uobl9yZXNhbXBsZXMpCiAgICApCiAgICB0YWlsID0gKDEuMCAtIGNpKSAvIDIuMAogICAgbG9faWR4ID0gbWF4KDAsIG1pbihuX3Jlc2FtcGxlcyAtIDEsIGludCh0YWlsICogbl9yZXNhbXBsZXMpKSkKICAgIGhpX2lkeCA9IG1heCgwLCBtaW4obl9yZXNhbXBsZXMgLSAxLCBpbnQoKDEuMCAtIHRhaWwpICogbl9yZXNhbXBsZXMpKSkKICAgIHJldHVybiBtZWFuc1tsb19pZHhdLCBtZWFuc1toaV9pZHhdCgoKZGVmIHBhaXJlZF9wZXJtdXRhdGlvbl90ZXN0KAogICAgYTogU2VxdWVuY2VbZmxvYXRdLAogICAgYjogU2VxdWVuY2VbZmxvYXRdLAogICAgbl9yZXNhbXBsZXM6IGludCA9IDEwXzAwMCwKICAgIHNlZWQ6IGludCA9IDQyLAopIC0+IGZsb2F0OgogICAgIiIiVHdvLXNpZGVkIHBhaXJlZCBwZXJtdXRhdGlvbiB0ZXN0IGZvciBhIGRpZmZlcmVuY2UgaW4gbWVhbnMuCgogICAgRm9yIGVhY2ggcmVzYW1wbGUsIHRoZSBzaWduIG9mIGV2ZXJ5IHBhaXJlZCBkaWZmZXJlbmNlIGlzIGZsaXBwZWQgd2l0aAogICAgcHJvYmFiaWxpdHkgMC41OyB0aGUgcC12YWx1ZSBpcyB0aGUgZnJhY3Rpb24gb2YgcmVzYW1wbGVzIHdob3NlIGFic29sdXRlCiAgICBtZWFuIGRpZmZlcmVuY2UgaXMgYXQgbGVhc3QgYXMgbGFyZ2UgYXMgdGhlIG9ic2VydmVkIG9uZSAod2l0aCB0aGUKICAgIG9ic2VydmVkIGFycmFuZ2VtZW50IGNvdW50ZWQsIHNvIHAgaXMgbmV2ZXIgZXhhY3RseSAwKS4KCiAgICBSZXR1cm5zIGEgcC12YWx1ZSBpbiAoMCwgMV0uICBTbWFsbCBwIHN1Z2dlc3RzIHRoZSBtZWFucyBnZW51aW5lbHkgZGlmZmVyLgogICAgIiIiCiAgICBhLCBiID0gbGlzdChhKSwgbGlzdChiKQogICAgX2NoZWNrX3BhaXJlZChhLCBiKQogICAgZGlmZnMgPSBbeCAtIHkgZm9yIHgsIHkgaW4gemlwKGEsIGIpXQogICAgb2JzZXJ2ZWQgPSBhYnMoc3RhdGlzdGljcy5tZWFuKGRpZmZzKSkKCiAgICBybmcgPSByYW5kb20uUmFuZG9tKHNlZWQpCiAgICBleHRyZW1lID0gMSAgIyBjb3VudCB0aGUgb2JzZXJ2ZWQgYXJyYW5nZW1lbnQgaXRzZWxmCiAgICBmb3IgXyBpbiByYW5nZShuX3Jlc2FtcGxlcyk6CiAgICAgICAgcGVybXV0ZWQgPSBbZCBpZiBybmcucmFuZG9tKCkgPCAwLjUgZWxzZSAtZCBmb3IgZCBpbiBkaWZmc10KICAgICAgICBpZiBhYnMoc3RhdGlzdGljcy5tZWFuKHBlcm11dGVkKSkgPj0gb2JzZXJ2ZWQ6CiAgICAgICAgICAgIGV4dHJlbWUgKz0gMQogICAgcmV0dXJuIGV4dHJlbWUgLyAobl9yZXNhbXBsZXMgKyAxKQoKCmRlZiB3aW5fcmF0ZShhOiBTZXF1ZW5jZVtmbG9hdF0sIGI6IFNlcXVlbmNlW2Zsb2F0XSkgLT4gZGljdDoKICAgICIiIkhlYWQtdG8taGVhZCBjb21wYXJpc29uIG9mIHR3byBwZXItZXhhbXBsZSBzY29yZSBsaXN0cy4KCiAgICBSZXR1cm5zIGNvdW50cyBvZiBleGFtcGxlcyB3aGVyZSBgYGFgYCBiZWF0cyBgYGJgYCwgYGBiYGAgYmVhdHMgYGBhYGAsCiAgICBhbmQgdGllcywgcGx1cyBgYHdpbl9yYXRlX2FgYCAoZnJhY3Rpb24gb2Ygbm9uLXRpZWQgZXhhbXBsZXMgd29uIGJ5IGBgYWBgLAogICAgb3IgMC41IHdoZW4gZXZlcnkgZXhhbXBsZSB0aWVzKS4KICAgICIiIgogICAgYSwgYiA9IGxpc3QoYSksIGxpc3QoYikKICAgIF9jaGVja19wYWlyZWQoYSwgYikKICAgIGFfd2lucyA9IHN1bSgxIGZvciB4LCB5IGluIHppcChhLCBiKSBpZiB4ID4geSkKICAgIGJfd2lucyA9IHN1bSgxIGZvciB4LCB5IGluIHppcChhLCBiKSBpZiB5ID4geCkKICAgIHRpZXMgPSBsZW4oYSkgLSBhX3dpbnMgLSBiX3dpbnMKICAgIGRlY2lzaXZlID0gYV93aW5zICsgYl93aW5zCiAgICByZXR1cm4gewogICAgICAgICJhX3dpbnMiOiBhX3dpbnMsCiAgICAgICAgImJfd2lucyI6IGJfd2lucywKICAgICAgICAidGllcyI6IHRpZXMsCiAgICAgICAgIndpbl9yYXRlX2EiOiBhX3dpbnMgLyBkZWNpc2l2ZSBpZiBkZWNpc2l2ZSBlbHNlIDAuNSwKICAgIH0KCgpkZWYgY29oZW5zX2QoYTogU2VxdWVuY2VbZmxvYXRdLCBiOiBTZXF1ZW5jZVtmbG9hdF0pIC0+IGZsb2F0OgogICAgIiIiU3RhbmRhcmRpemVkIG1lYW4gZGlmZmVyZW5jZSBvZiB0d28gaW5kZXBlbmRlbnQgc2NvcmUgbGlzdHMuCgogICAgVXNlcyB0aGUgcG9vbGVkIHN0YW5kYXJkIGRldmlhdGlvbi4gUmV0dXJucyAwLjAgd2hlbiBib3RoIGxpc3RzIGFyZQogICAgY29uc3RhbnQgKG5vIHZhcmlhbmNlIHRvIHN0YW5kYXJkaXplIGJ5KSBpbnN0ZWFkIG9mIGRpdmlkaW5nIGJ5IHplcm8uCiAgICBQb3NpdGl2ZSB2YWx1ZXMgbWVhbiBgYGFgYCBzY29yZXMgaGlnaGVyIG9uIGF2ZXJhZ2UgdGhhbiBgYGJgYC4KICAgICIiIgogICAgYSwgYiA9IGxpc3QoYSksIGxpc3QoYikKICAgIGlmIG5vdCBhIG9yIG5vdCBiOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoImlucHV0cyBtdXN0IGJlIG5vbi1lbXB0eSIpCiAgICBuX2EsIG5fYiA9IGxlbihhKSwgbGVuKGIpCiAgICB2YXJfYSA9IHN0YXRpc3RpY3MudmFyaWFuY2UoYSkgaWYgbl9hID4gMSBlbHNlIDAuMAogICAgdmFyX2IgPSBzdGF0aXN0aWNzLnZhcmlhbmNlKGIpIGlmIG5fYiA+IDEgZWxzZSAwLjAKICAgIHBvb2xlZCA9ICgobl9hIC0gMSkgKiB2YXJfYSArIChuX2IgLSAxKSAqIHZhcl9iKSAvIG1heCgxLCBuX2EgKyBuX2IgLSAyKQogICAgaWYgcG9vbGVkIDw9IDAuMDoKICAgICAgICByZXR1cm4gMC4wCiAgICByZXR1cm4gKHN0YXRpc3RpY3MubWVhbihhKSAtIHN0YXRpc3RpY3MubWVhbihiKSkgLyAocG9vbGVkICoqIDAuNSkKCgpkZWYgcGVyY2VudGlsZSh2YWx1ZXM6IFNlcXVlbmNlW2Zsb2F0XSwgcDogZmxvYXQpIC0+IGZsb2F0OgogICAgIiIiVGhlIGBgcGBgLXRoIHBlcmNlbnRpbGUgb2YgYGB2YWx1ZXNgYCAoMCA8PSBwIDw9IDEwMCkuCgogICAgVXNlcyBsaW5lYXIgaW50ZXJwb2xhdGlvbiBiZXR3ZWVuIHRoZSBjbG9zZXN0IHJhbmtzLCB0aGUgc2FtZSBtZXRob2QKICAgIGFzIHRoZSBkZWZhdWx0IGluIG51bXB5LiBBIHNpbmdsZSB2YWx1ZSByZXR1cm5zIGl0c2VsZiBmb3IgYW55IGBgcGBgLgogICAgIiIiCiAgICB2YWx1ZXMgPSBzb3J0ZWQodmFsdWVzKQogICAgaWYgbm90IHZhbHVlczoKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJ2YWx1ZXMgbXVzdCBiZSBub24tZW1wdHkiKQogICAgaWYgbm90IDAuMCA8PSBwIDw9IDEwMC4wOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoInAgbXVzdCBiZSBpbiBbMCwgMTAwXSIpCiAgICBpZiBsZW4odmFsdWVzKSA9PSAxOgogICAgICAgIHJldHVybiBmbG9hdCh2YWx1ZXNbMF0pCiAgICByYW5rID0gKHAgLyAxMDAuMCkgKiAobGVuKHZhbHVlcykgLSAxKQogICAgbG93ID0gaW50KHJhbmspCiAgICBoaWdoID0gbWluKGxvdyArIDEsIGxlbih2YWx1ZXMpIC0gMSkKICAgIGZyYWMgPSByYW5rIC0gbG93CiAgICByZXR1cm4gZmxvYXQodmFsdWVzW2xvd10gKyAodmFsdWVzW2hpZ2hdIC0gdmFsdWVzW2xvd10pICogZnJhYykKCgpkZWYgaW50ZXJxdWFydGlsZV9yYW5nZSh2YWx1ZXM6IFNlcXVlbmNlW2Zsb2F0XSkgLT4gZmxvYXQ6CiAgICAiIiJEaWZmZXJlbmNlIGJldHdlZW4gdGhlIDc1dGggYW5kIDI1dGggcGVyY2VudGlsZXMgb2YgYGB2YWx1ZXNgYC4KCiAgICBBIHJvYnVzdCBzcHJlYWQgbWVhc3VyZSB0aGF0IGlnbm9yZXMgb3V0bGllcnMgaW4gZWl0aGVyIHRhaWwuIEEKICAgIHNpbmdsZSB2YWx1ZSAob3IgYSBjb25zdGFudCBsaXN0KSBoYXMgYW4gSVFSIG9mIDAuMC4KICAgICIiIgogICAgdmFsdWVzID0gbGlzdCh2YWx1ZXMpCiAgICBpZiBub3QgdmFsdWVzOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoInZhbHVlcyBtdXN0IGJlIG5vbi1lbXB0eSIpCiAgICByZXR1cm4gcGVyY2VudGlsZSh2YWx1ZXMsIDc1KSAtIHBlcmNlbnRpbGUodmFsdWVzLCAyNSkKCgpkZWYgbWVkaWFuX2Fic29sdXRlX2RldmlhdGlvbih2YWx1ZXM6IFNlcXVlbmNlW2Zsb2F0XSkgLT4gZmxvYXQ6CiAgICAiIiJNZWRpYW4gb2YgdGhlIGFic29sdXRlIGRldmlhdGlvbnMgZnJvbSB0aGUgbWVkaWFuIG9mIGBgdmFsdWVzYGAuCgogICAgQSByb2J1c3Qgc3ByZWFkIG1lYXN1cmU6IHVubGlrZSB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uIGl0IGJhcmVseQogICAgbW92ZXMgd2hlbiBhIHNpbmdsZSBvdXRsaWVyIGxhbmRzIGluIHRoZSB0YWlsLiBBIHNpbmdsZSB2YWx1ZSAob3IgYQogICAgY29uc3RhbnQgbGlzdCkgaGFzIGEgTUFEIG9mIDAuMC4KICAgICIiIgogICAgdmFsdWVzID0gbGlzdCh2YWx1ZXMpCiAgICBpZiBub3QgdmFsdWVzOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoInZhbHVlcyBtdXN0IGJlIG5vbi1lbXB0eSIpCiAgICBtZWQgPSBzdGF0aXN0aWNzLm1lZGlhbih2YWx1ZXMpCiAgICByZXR1cm4gZmxvYXQoc3RhdGlzdGljcy5tZWRpYW4oW2Ficyh2IC0gbWVkKSBmb3IgdiBpbiB2YWx1ZXNdKSkKCgpkZWYgdHJpbW1lZF9tZWFuKHZhbHVlczogU2VxdWVuY2VbZmxvYXRdLCBwcm9wb3J0aW9uOiBmbG9hdCA9IDAuMSkgLT4gZmxvYXQ6CiAgICAiIiJNZWFuIGFmdGVyIGRyb3BwaW5nIHRoZSBsb3dlc3QgYW5kIGhpZ2hlc3QgYGBwcm9wb3J0aW9uYGAgb2YgdmFsdWVzLgoKICAgIEEgcm9idXN0IGNlbnRlciBlc3RpbWF0ZTogYSBmZXcgb3V0bGllciBzY29yZXMgYXQgZWl0aGVyIGVuZCBkbyBub3QKICAgIGRyYWcgaXQgdGhlIHdheSBhIHBsYWluIG1lYW4gbW92ZXMuIGBgcHJvcG9ydGlvbmBgIG11c3QgYmUgaW4KICAgIFswLCAwLjUpOyBhdCAwLjUgb3IgYWJvdmUgbm90aGluZyB3b3VsZCBiZSBsZWZ0IHRvIGF2ZXJhZ2UuCiAgICAiIiIKICAgIHZhbHVlcyA9IHNvcnRlZCh2YWx1ZXMpCiAgICBpZiBub3QgdmFsdWVzOgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoInZhbHVlcyBtdXN0IGJlIG5vbi1lbXB0eSIpCiAgICBpZiBub3QgMCA8PSBwcm9wb3J0aW9uIDwgMC41OgogICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoInByb3BvcnRpb24gbXVzdCBiZSBpbiBbMCwgMC41KSIpCiAgICBrID0gaW50KGxlbih2YWx1ZXMpICogcHJvcG9ydGlvbikKICAgIHRyaW1tZWQgPSB2YWx1ZXNbazpsZW4odmFsdWVzKSAtIGtdIGlmIGsgZWxzZSB2YWx1ZXMKICAgIHJldHVybiBmbG9hdChzdGF0aXN0aWNzLm1lYW4odHJpbW1lZCkpCgoKZGVmIHN1bW1hcml6ZSh2YWx1ZXM6IFNlcXVlbmNlW2Zsb2F0XSkgLT4gZGljdDoKICAgICIiIk1lYW4sIG1lZGlhbiwgc3RhbmRhcmQgZGV2aWF0aW9uLCBtaW4sIG1heCwgYW5kIGNvdW50IGZvciBhIHNjb3JlIGxpc3QuIiIiCiAgICB2YWx1ZXMgPSBsaXN0KHZhbHVlcykKICAgIGlmIG5vdCB2YWx1ZXM6CiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcigidmFsdWVzIG11c3QgYmUgbm9uLWVtcHR5IikKICAgIHJldHVybiB7CiAgICAgICAgIm1lYW4iOiBzdGF0aXN0aWNzLm1lYW4odmFsdWVzKSwKICAgICAgICAibWVkaWFuIjogc3RhdGlzdGljcy5tZWRpYW4odmFsdWVzKSwKICAgICAgICAic3RkZXYiOiBzdGF0aXN0aWNzLnN0ZGV2KHZhbHVlcykgaWYgbGVuKHZhbHVlcykgPiAxIGVsc2UgMC4wLAogICAgICAgICJtaW4iOiBtaW4odmFsdWVzKSwKICAgICAgICAibWF4IjogbWF4KHZhbHVlcyksCiAgICAgICAgIm4iOiBsZW4odmFsdWVzKSwKICAgIH0K
+"""Statistical helpers for comparing experiment results.
+
+All functions are deterministic given ``seed`` and use only the standard
+library:
+
+- :func:`bootstrap_ci` — percentile bootstrap confidence interval for a mean.
+- :func:`paired_permutation_test` — exact-ish paired test for whether two
+  per-example score lists have different means.
+- :func:`win_rate` — head-to-head win/tie/loss counts for two score lists.
+- :func:`summarize` — mean, median, stdev, min, and max of one score list.
+- :func:`percentile` — a single percentile of one score list.
+- :func:`interquartile_range` — spread between the 25th and 75th percentiles.
+- :func:`median_absolute_deviation` — median distance from the median.
+"""
+
+from __future__ import annotations
+
+import random
+import statistics
+from typing import List, Sequence
+
+
+def _check_paired(a: Sequence[float], b: Sequence[float]) -> None:
+    if len(a) != len(b):
+        raise ValueError(f"paired inputs must have equal length ({len(a)} != {len(b)})")
+    if not a:
+        raise ValueError("inputs must be non-empty")
+
+
+def bootstrap_ci(
+    values: Sequence[float],
+    n_resamples: int = 2000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> tuple[float, float]:
+    """Percentile bootstrap confidence interval for the mean of ``values``.
+
+    Resamples with replacement ``n_resamples`` times, takes the mean of each
+    resample, and returns the ``(1 - ci) / 2`` and ``1 - (1 - ci) / 2``
+    percentiles.  Deterministic for a fixed ``seed``.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0.0 < ci < 1.0:
+        raise ValueError("ci must be in (0, 1)")
+    if n_resamples < 100:
+        raise ValueError("n_resamples must be >= 100 for a stable interval")
+
+    rng = random.Random(seed)
+    n = len(values)
+    means = sorted(
+        statistics.mean(rng.choices(values, k=n)) for _ in range(n_resamples)
+    )
+    tail = (1.0 - ci) / 2.0
+    lo_idx = max(0, min(n_resamples - 1, int(tail * n_resamples)))
+    hi_idx = max(0, min(n_resamples - 1, int((1.0 - tail) * n_resamples)))
+    return means[lo_idx], means[hi_idx]
+
+
+def paired_permutation_test(
+    a: Sequence[float],
+    b: Sequence[float],
+    n_resamples: int = 10_000,
+    seed: int = 42,
+) -> float:
+    """Two-sided paired permutation test for a difference in means.
+
+    For each resample, the sign of every paired difference is flipped with
+    probability 0.5; the p-value is the fraction of resamples whose absolute
+    mean difference is at least as large as the observed one (with the
+    observed arrangement counted, so p is never exactly 0).
+
+    Returns a p-value in (0, 1].  Small p suggests the means genuinely differ.
+    """
+    a, b = list(a), list(b)
+    _check_paired(a, b)
+    diffs = [x - y for x, y in zip(a, b)]
+    observed = abs(statistics.mean(diffs))
+
+    rng = random.Random(seed)
+    extreme = 1  # count the observed arrangement itself
+    for _ in range(n_resamples):
+        permuted = [d if rng.random() < 0.5 else -d for d in diffs]
+        if abs(statistics.mean(permuted)) >= observed:
+            extreme += 1
+    return extreme / (n_resamples + 1)
+
+
+def win_rate(a: Sequence[float], b: Sequence[float]) -> dict:
+    """Head-to-head comparison of two per-example score lists.
+
+    Returns counts of examples where ``a`` beats ``b``, ``b`` beats ``a``,
+    and ties, plus ``win_rate_a`` (fraction of non-tied examples won by ``a``,
+    or 0.5 when every example ties).
+    """
+    a, b = list(a), list(b)
+    _check_paired(a, b)
+    a_wins = sum(1 for x, y in zip(a, b) if x > y)
+    b_wins = sum(1 for x, y in zip(a, b) if y > x)
+    ties = len(a) - a_wins - b_wins
+    decisive = a_wins + b_wins
+    return {
+        "a_wins": a_wins,
+        "b_wins": b_wins,
+        "ties": ties,
+        "win_rate_a": a_wins / decisive if decisive else 0.5,
+    }
+
+
+def cohens_d(a: Sequence[float], b: Sequence[float]) -> float:
+    """Standardized mean difference of two independent score lists.
+
+    Uses the pooled standard deviation. Returns 0.0 when both lists are
+    constant (no variance to standardize by) instead of dividing by zero.
+    Positive values mean ``a`` scores higher on average than ``b``.
+    """
+    a, b = list(a), list(b)
+    if not a or not b:
+        raise ValueError("inputs must be non-empty")
+    n_a, n_b = len(a), len(b)
+    var_a = statistics.variance(a) if n_a > 1 else 0.0
+    var_b = statistics.variance(b) if n_b > 1 else 0.0
+    pooled = ((n_a - 1) * var_a + (n_b - 1) * var_b) / max(1, n_a + n_b - 2)
+    if pooled <= 0.0:
+        return 0.0
+    return (statistics.mean(a) - statistics.mean(b)) / (pooled ** 0.5)
+
+
+def percentile(values: Sequence[float], p: float) -> float:
+    """The ``p``-th percentile of ``values`` (0 <= p <= 100).
+
+    Uses linear interpolation between the closest ranks, the same method
+    as the default in numpy. A single value returns itself for any ``p``.
+    """
+    values = sorted(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0.0 <= p <= 100.0:
+        raise ValueError("p must be in [0, 100]")
+    if len(values) == 1:
+        return float(values[0])
+    rank = (p / 100.0) * (len(values) - 1)
+    low = int(rank)
+    high = min(low + 1, len(values) - 1)
+    frac = rank - low
+    return float(values[low] + (values[high] - values[low]) * frac)
+
+
+def interquartile_range(values: Sequence[float]) -> float:
+    """Difference between the 75th and 25th percentiles of ``values``.
+
+    A robust spread measure that ignores outliers in either tail. A
+    single value (or a constant list) has an IQR of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return percentile(values, 75) - percentile(values, 25)
+
+
+def median_absolute_deviation(values: Sequence[float]) -> float:
+    """Median of the absolute deviations from the median of ``values``.
+
+    A robust spread measure: unlike the standard deviation it barely
+    moves when a single outlier lands in the tail. A single value (or a
+    constant list) has a MAD of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    med = statistics.median(values)
+    return float(statistics.median([abs(v - med) for v in values]))
+
+
+def trimmed_mean(values: Sequence[float], proportion: float = 0.1) -> float:
+    """Mean after dropping the lowest and highest ``proportion`` of values.
+
+    A robust center estimate: a few outlier scores at either end do not
+    drag it the way a plain mean moves. ``proportion`` must be in
+    [0, 0.5); at 0.5 or above nothing would be left to average.
+    """
+    values = sorted(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0 <= proportion < 0.5:
+        raise ValueError("proportion must be in [0, 0.5)")
+    k = int(len(values) * proportion)
+    trimmed = values[k:len(values) - k] if k else values
+    return float(statistics.mean(trimmed))
+
+
+def summarize(values: Sequence[float]) -> dict:
+    """Mean, median, standard deviation, min, max, and count for a score list."""
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return {
+        "mean": statistics.mean(values),
+        "median": statistics.median(values),
+        "stdev": statistics.stdev(values) if len(values) > 1 else 0.0,
+        "min": min(values),
+        "max": max(values),
+        "n": len(values),
+    }
