@@ -138,3 +138,24 @@ def test_percentile_interpolates_and_validates():
         percentile([], 50)
     with pytest.raises(ValueError):
         percentile([1.0], 101)
+
+
+def test_trimmed_mean_drops_outliers():
+    from eval_harness.stats import trimmed_mean
+
+    values = [1.0, 2.0, 3.0, 4.0, 100.0]
+    # proportion 0.2 drops one value from each end: mean of [2, 3, 4]
+    assert trimmed_mean(values, 0.2) == 3.0
+    assert trimmed_mean(values, 0.0) == 22.0
+    assert trimmed_mean([5.0], 0.4) == 5.0
+
+
+def test_trimmed_mean_validation():
+    from eval_harness.stats import trimmed_mean
+
+    with pytest.raises(ValueError):
+        trimmed_mean([], 0.1)
+    with pytest.raises(ValueError):
+        trimmed_mean([1.0, 2.0], 0.5)
+    with pytest.raises(ValueError):
+        trimmed_mean([1.0, 2.0], -0.1)
