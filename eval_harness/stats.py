@@ -13,6 +13,7 @@ library:
 - :func:`median_absolute_deviation` — median distance from the median.
 - :func:`standard_error` — standard error of the mean of one score list.
 - :func:`coefficient_of_variation` — stdev relative to the mean of one list.
+- :func:`value_range` — difference between the max and min of one list.
 """
 
 from __future__ import annotations
@@ -223,6 +224,18 @@ def coefficient_of_variation(values: Sequence[float]) -> float:
     if mean == 0:
         return 0.0
     return float(statistics.stdev(values) / mean)
+
+
+def value_range(values: Sequence[float]) -> float:
+    """Difference between the largest and smallest values in ``values``.
+
+    The simplest spread measure there is. A single value (or a
+    constant list) has a range of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return float(max(values) - min(values))
 
 
 def summarize(values: Sequence[float]) -> dict:
