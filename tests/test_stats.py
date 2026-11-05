@@ -197,3 +197,14 @@ def test_value_range_spread():
     assert value_range([3.0, 3.0, 3.0]) == 0.0
     with pytest.raises(ValueError):
         value_range([])
+
+
+def test_sample_variance_bessel_corrected():
+    from eval_harness.stats import sample_variance
+
+    # Variance of [1, 2, 3, 4] with denominator n - 1 is 5/3.
+    assert sample_variance([1.0, 2.0, 3.0, 4.0]) == pytest.approx(5.0 / 3.0)
+    assert sample_variance([5.0]) == pytest.approx(0.0)
+    assert sample_variance([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        sample_variance([])
