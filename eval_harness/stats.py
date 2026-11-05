@@ -14,6 +14,7 @@ library:
 - :func:`standard_error` — standard error of the mean of one score list.
 - :func:`coefficient_of_variation` — stdev relative to the mean of one list.
 - :func:`value_range` — difference between the max and min of one list.
+- :func:`population_variance` — variance of one list, denominator n.
 """
 
 from __future__ import annotations
@@ -250,6 +251,20 @@ def sample_variance(values: Sequence[float]) -> float:
     if len(values) == 1:
         return 0.0
     return float(statistics.variance(values))
+
+
+def population_variance(values: Sequence[float]) -> float:
+    """Population variance of ``values`` (denominator n, not n - 1).
+
+    Use this when the list is the whole population rather than a
+    sample of it; for a sample, :func:`sample_variance` is the
+    unbiased estimate. A single value (or a constant list) has a
+    variance of 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return float(statistics.pvariance(values))
 
 
 def summarize(values: Sequence[float]) -> dict:
