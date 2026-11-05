@@ -186,3 +186,14 @@ def test_standard_error_scales_with_spread_and_count():
     assert standard_error([2.0, 2.0, 2.0]) == pytest.approx(0.0)
     with pytest.raises(ValueError):
         standard_error([])
+
+
+def test_value_range_spread():
+    from eval_harness.stats import value_range
+
+    assert value_range([1.0, 4.0, 2.0]) == 3.0
+    assert value_range([-2.0, 2.0]) == 4.0
+    assert value_range([5.0]) == 0.0
+    assert value_range([3.0, 3.0, 3.0]) == 0.0
+    with pytest.raises(ValueError):
+        value_range([])
