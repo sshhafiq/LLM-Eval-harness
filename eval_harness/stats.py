@@ -238,6 +238,20 @@ def value_range(values: Sequence[float]) -> float:
     return float(max(values) - min(values))
 
 
+def sample_variance(values: Sequence[float]) -> float:
+    """Sample variance of ``values`` (Bessel-corrected, denominator n - 1).
+
+    A single value (or a constant list) has a variance of 0.0, matching
+    the convention the other helpers here use for degenerate inputs.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return 0.0
+    return float(statistics.variance(values))
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
