@@ -208,3 +208,15 @@ def test_sample_variance_bessel_corrected():
     assert sample_variance([2.0, 2.0, 2.0]) == pytest.approx(0.0)
     with pytest.raises(ValueError):
         sample_variance([])
+
+
+def test_population_variance_uses_n_denominator():
+    from eval_harness.stats import population_variance
+
+    # Population variance of [1, 2, 3, 4] with denominator n is 1.25,
+    # smaller than the sample variance (5/3) of the same values.
+    assert population_variance([1.0, 2.0, 3.0, 4.0]) == pytest.approx(1.25)
+    assert population_variance([5.0]) == pytest.approx(0.0)
+    assert population_variance([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        population_variance([])
