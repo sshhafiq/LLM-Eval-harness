@@ -15,6 +15,7 @@ library:
 - :func:`coefficient_of_variation` — stdev relative to the mean of one list.
 - :func:`value_range` — difference between the max and min of one list.
 - :func:`population_variance` — variance of one list, denominator n.
+- :func:`root_mean_square` — square root of the mean of squared values.
 """
 
 from __future__ import annotations
@@ -265,6 +266,34 @@ def population_variance(values: Sequence[float]) -> float:
     if not values:
         raise ValueError("values must be non-empty")
     return float(statistics.pvariance(values))
+
+
+def root_mean_square(values: Sequence[float]) -> float:
+    """Square root of the mean of the squared values in ``values``.
+
+    A magnitude measure that weights larger scores more heavily than a
+    plain mean does, handy for error-like scores where big misses should
+    stand out. A single value returns its absolute value.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return float((sum(v * v for v in values) / len(values)) ** 0.5)
+
+
+def geometric_mean(values: Sequence[float]) -> float:
+    """Geometric mean of ``values``, for ratio-like scores.
+
+    Every value must be positive: the geometric mean is undefined for
+    zero or negative inputs, so those raise ``ValueError`` instead of
+    returning a misleading number. A single value returns itself.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if any(v <= 0 for v in values):
+        raise ValueError("geometric mean requires positive values")
+    return float(statistics.geometric_mean(values))
 
 
 def summarize(values: Sequence[float]) -> dict:
