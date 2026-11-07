@@ -259,3 +259,14 @@ def test_harmonic_mean_for_rates():
         harmonic_mean([])
     with pytest.raises(ValueError):
         harmonic_mean([1.0, 0.0])
+
+
+def test_midrange_averages_the_extremes():
+    from eval_harness.stats import midrange
+
+    assert midrange([1.0, 4.0]) == pytest.approx(2.5)
+    assert midrange([2.0, 2.0, 2.0]) == pytest.approx(2.0)
+    assert midrange([5.0]) == pytest.approx(5.0)
+    assert midrange([-3.0, 7.0, 1.0]) == pytest.approx(2.0)
+    with pytest.raises(ValueError):
+        midrange([])
