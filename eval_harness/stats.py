@@ -311,6 +311,19 @@ def harmonic_mean(values: Sequence[float]) -> float:
     return float(statistics.harmonic_mean(values))
 
 
+def midrange(values: Sequence[float]) -> float:
+    """Midrange of ``values``: the mean of its minimum and maximum.
+
+    A quick centre estimate from just the extremes, useful as a sanity
+    check alongside the median when a score list is short. A single
+    value, or a constant list, returns that value.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return float((min(values) + max(values)) / 2)
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
