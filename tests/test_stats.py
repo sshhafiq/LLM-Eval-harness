@@ -246,3 +246,16 @@ def test_geometric_mean_for_ratio_scores():
         geometric_mean([1.0, 0.0])
     with pytest.raises(ValueError):
         geometric_mean([1.0, -2.0])
+
+
+def test_harmonic_mean_for_rates():
+    from eval_harness.stats import harmonic_mean
+
+    # Harmonic mean of 1 and 4 is 2 / (1 + 1/4) = 1.6, below the arithmetic mean.
+    assert harmonic_mean([1.0, 4.0]) == pytest.approx(1.6)
+    assert harmonic_mean([2.0, 2.0, 2.0]) == pytest.approx(2.0)
+    assert harmonic_mean([5.0]) == pytest.approx(5.0)
+    with pytest.raises(ValueError):
+        harmonic_mean([])
+    with pytest.raises(ValueError):
+        harmonic_mean([1.0, 0.0])
