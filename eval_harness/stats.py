@@ -296,6 +296,21 @@ def geometric_mean(values: Sequence[float]) -> float:
     return float(statistics.geometric_mean(values))
 
 
+def harmonic_mean(values: Sequence[float]) -> float:
+    """Harmonic mean of ``values``, for averaging rates and ratios.
+
+    Every value must be positive, like the geometric mean: a zero or
+    negative input raises ``ValueError``. A single value returns itself,
+    and equal values return that value.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if any(v <= 0 for v in values):
+        raise ValueError("harmonic mean requires positive values")
+    return float(statistics.harmonic_mean(values))
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
