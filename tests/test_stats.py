@@ -220,3 +220,29 @@ def test_population_variance_uses_n_denominator():
     assert population_variance([2.0, 2.0, 2.0]) == pytest.approx(0.0)
     with pytest.raises(ValueError):
         population_variance([])
+
+
+def test_root_mean_square_weights_large_values():
+    from eval_harness.stats import root_mean_square
+
+    # sqrt((9 + 16) / 2) = sqrt(12.5); RMS sits above the plain mean of 3.5.
+    assert root_mean_square([3.0, 4.0]) == pytest.approx(12.5 ** 0.5)
+    assert root_mean_square([3.0, 4.0]) > 3.5
+    assert root_mean_square([-5.0]) == pytest.approx(5.0)
+    assert root_mean_square([0.0, 0.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        root_mean_square([])
+
+
+def test_geometric_mean_for_ratio_scores():
+    from eval_harness.stats import geometric_mean
+
+    assert geometric_mean([1.0, 4.0]) == pytest.approx(2.0)
+    assert geometric_mean([2.0, 8.0, 32.0]) == pytest.approx(8.0)
+    assert geometric_mean([5.0]) == pytest.approx(5.0)
+    with pytest.raises(ValueError):
+        geometric_mean([])
+    with pytest.raises(ValueError):
+        geometric_mean([1.0, 0.0])
+    with pytest.raises(ValueError):
+        geometric_mean([1.0, -2.0])
