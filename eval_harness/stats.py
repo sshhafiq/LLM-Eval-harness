@@ -359,6 +359,20 @@ def mean_absolute_deviation(values: Sequence[float]) -> float:
     return float(statistics.mean(abs(v - mean) for v in values))
 
 
+def interpercentile_range(
+    values: Sequence[float], low: float = 10.0, high: float = 90.0
+) -> float:
+    """Distance between the ``high`` and ``low`` percentiles of ``values``.
+
+    A robust spread measure for score distributions: unlike the full
+    range it ignores the most extreme runs on each side, so one outlier
+    run does not dominate the reported spread.
+    """
+    if not 0.0 <= low < high <= 100.0:
+        raise ValueError("percentiles must satisfy 0 <= low < high <= 100")
+    return percentile(values, high) - percentile(values, low)
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
