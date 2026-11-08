@@ -324,6 +324,26 @@ def midrange(values: Sequence[float]) -> float:
     return float((min(values) + max(values)) / 2)
 
 
+def z_scores(values: Sequence[float]) -> list[float]:
+    """Z-scores of ``values`` against their own mean and sample stdev.
+
+    Each score comes back as its distance from the mean in standard
+    deviations, which makes outlier runs easy to spot in a score list.
+    A single value, or a constant list, has no spread, so every z-score
+    is 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return [0.0]
+    mean = statistics.mean(values)
+    stdev = statistics.stdev(values)
+    if stdev == 0.0:
+        return [0.0] * len(values)
+    return [float((v - mean) / stdev) for v in values]
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
