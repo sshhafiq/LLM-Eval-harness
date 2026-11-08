@@ -344,6 +344,21 @@ def z_scores(values: Sequence[float]) -> list[float]:
     return [float((v - mean) / stdev) for v in values]
 
 
+def mean_absolute_deviation(values: Sequence[float]) -> float:
+    """Mean absolute deviation of ``values`` around their own mean.
+
+    The average distance from the mean, in the same units as the scores,
+    which makes it a more readable spread measure than variance when
+    reporting how consistent a model's scores are. A single value, or
+    a constant list, returns 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    mean = statistics.mean(values)
+    return float(statistics.mean(abs(v - mean) for v in values))
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
