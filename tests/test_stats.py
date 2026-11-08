@@ -307,3 +307,19 @@ def test_interpercentile_range_ignores_extreme_runs():
         interpercentile_range(values, 90.0, 10.0)
     with pytest.raises(ValueError):
         interpercentile_range([])
+
+
+def test_winsorized_mean_clamps_extreme_runs():
+    from eval_harness.stats import winsorized_mean
+
+    # 20th percentile of [0, 1, 2, 3, 100] is 0.8 and the 80th is 22.4,
+    # so the clamped list is [0.8, 1, 2, 3, 22.4] with mean 5.84.
+    assert winsorized_mean([0.0, 1.0, 2.0, 3.0, 100.0], 0.2) == pytest.approx(5.84)
+    # At proportion 0 nothing is clamped, so this is the plain mean.
+    assert winsorized_mean([1.0, 2.0, 3.0], 0.0) == pytest.approx(2.0)
+    assert winsorized_mean([5.0]) == pytest.approx(5.0)
+    assert winsorized_mean([2.0, 2.0, 2.0]) == pytest.approx(2.0)
+    with pytest.raises(ValueError):
+        winsorized_mean([])
+    with pytest.raises(ValueError):
+        winsorized_mean([1.0, 2.0], 0.5)
