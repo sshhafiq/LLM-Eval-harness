@@ -16,6 +16,7 @@ library:
 - :func:`value_range` — difference between the max and min of one list.
 - :func:`population_variance` — variance of one list, denominator n.
 - :func:`root_mean_square` — square root of the mean of squared values.
+- :func:`winsorized_mean` — mean after clamping extreme values to percentiles.
 """
 
 from __future__ import annotations
@@ -371,6 +372,26 @@ def interpercentile_range(
     if not 0.0 <= low < high <= 100.0:
         raise ValueError("percentiles must satisfy 0 <= low < high <= 100")
     return percentile(values, high) - percentile(values, low)
+
+
+def winsorized_mean(values: Sequence[float], proportion: float = 0.1) -> float:
+    """Mean of ``values`` after clamping the extremes to percentiles.
+
+    Values below the ``proportion`` percentile are raised to that
+    percentile and values above the ``1 - proportion`` percentile are
+    lowered to it, so a few outlier runs still count but cannot drag
+    the mean the way they would in a plain average. ``proportion``
+    must be in [0, 0.5); at 0 the result is the plain mean.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if not 0 <= proportion < 0.5:
+        raise ValueError("proportion must be in [0, 0.5)")
+    low = percentile(values, proportion * 100.0)
+    high = percentile(values, (1.0 - proportion) * 100.0)
+    clamped = [min(max(v, low), high) for v in values]
+    return float(statistics.mean(clamped))
 
 
 def summarize(values: Sequence[float]) -> dict:
