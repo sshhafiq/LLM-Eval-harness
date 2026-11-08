@@ -283,3 +283,27 @@ def test_z_scores_measure_distance_from_mean():
     assert z_scores([2.0, 2.0, 2.0]) == [0.0, 0.0, 0.0]
     with pytest.raises(ValueError):
         z_scores([])
+
+
+def test_mean_absolute_deviation_measures_spread_around_mean():
+    from eval_harness.stats import mean_absolute_deviation
+
+    assert mean_absolute_deviation([1.0, 2.0, 3.0]) == pytest.approx(2 / 3)
+    assert mean_absolute_deviation([5.0]) == pytest.approx(0.0)
+    assert mean_absolute_deviation([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    assert mean_absolute_deviation([0.0, 10.0]) == pytest.approx(5.0)
+    with pytest.raises(ValueError):
+        mean_absolute_deviation([])
+
+
+def test_interpercentile_range_ignores_extreme_runs():
+    from eval_harness.stats import interpercentile_range
+
+    values = [float(i) for i in range(101)]
+    assert interpercentile_range(values) == pytest.approx(80.0)
+    assert interpercentile_range(values, 25.0, 75.0) == pytest.approx(50.0)
+    assert interpercentile_range([3.0, 3.0, 3.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        interpercentile_range(values, 90.0, 10.0)
+    with pytest.raises(ValueError):
+        interpercentile_range([])
