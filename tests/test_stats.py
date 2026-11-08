@@ -270,3 +270,16 @@ def test_midrange_averages_the_extremes():
     assert midrange([-3.0, 7.0, 1.0]) == pytest.approx(2.0)
     with pytest.raises(ValueError):
         midrange([])
+
+
+def test_z_scores_measure_distance_from_mean():
+    from eval_harness.stats import z_scores
+
+    scores = z_scores([1.0, 2.0, 3.0])
+    assert scores == pytest.approx([-1.0, 0.0, 1.0])
+    # Z-scores of any non-constant list sum to zero.
+    assert sum(z_scores([0.2, 0.5, 0.9, 0.4])) == pytest.approx(0.0)
+    assert z_scores([5.0]) == [0.0]
+    assert z_scores([2.0, 2.0, 2.0]) == [0.0, 0.0, 0.0]
+    with pytest.raises(ValueError):
+        z_scores([])
