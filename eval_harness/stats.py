@@ -416,6 +416,27 @@ def skewness(values: Sequence[float]) -> float:
     return float(m3 / (m2 ** 1.5))
 
 
+def kurtosis(values: Sequence[float]) -> float:
+    """Excess kurtosis of ``values``: the population ratio m4 / m2 ** 2 - 3.
+
+    Positive values mean heavier tails than a normal distribution (more
+    extreme outlier runs), negative values thinner tails, and 0.0 the
+    same tail weight as a normal. A single value, or a constant list,
+    has no spread, so it returns 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return 0.0
+    mean = statistics.mean(values)
+    m2 = statistics.mean((v - mean) ** 2 for v in values)
+    if m2 == 0.0:
+        return 0.0
+    m4 = statistics.mean((v - mean) ** 4 for v in values)
+    return float(m4 / (m2 ** 2) - 3.0)
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
