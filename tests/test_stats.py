@@ -309,6 +309,19 @@ def test_interpercentile_range_ignores_extreme_runs():
         interpercentile_range([])
 
 
+def test_skewness_detects_tail_direction():
+    from eval_harness.stats import skewness
+
+    assert skewness([1.0, 2.0, 3.0]) == pytest.approx(0.0)
+    # A single high outlier pulls the right tail out.
+    assert skewness([1.0, 2.0, 3.0, 4.0, 10.0]) > 0.0
+    assert skewness([10.0, 9.0, 8.0, 7.0, 1.0]) < 0.0
+    assert skewness([5.0]) == pytest.approx(0.0)
+    assert skewness([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        skewness([])
+
+
 def test_winsorized_mean_clamps_extreme_runs():
     from eval_harness.stats import winsorized_mean
 
