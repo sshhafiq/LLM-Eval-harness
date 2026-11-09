@@ -322,6 +322,19 @@ def test_skewness_detects_tail_direction():
         skewness([])
 
 
+def test_kurtosis_flags_heavy_tails():
+    from eval_harness.stats import kurtosis
+
+    # One far outlier among tight values: much heavier tails than normal.
+    assert kurtosis([1.0, 1.0, 1.0, 1.0, 10.0]) > 0.0
+    # Evenly spread values have thinner tails than a normal distribution.
+    assert kurtosis([1.0, 2.0, 3.0, 4.0, 5.0]) < 0.0
+    assert kurtosis([5.0]) == pytest.approx(0.0)
+    assert kurtosis([2.0, 2.0, 2.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        kurtosis([])
+
+
 def test_winsorized_mean_clamps_extreme_runs():
     from eval_harness.stats import winsorized_mean
 
