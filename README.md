@@ -134,3 +134,7 @@ Then use `--metrics keyword_recall` or `get_metric("keyword_recall")`.
 python -m pytest          # full suite
 python examples/run_example.py   # end-to-end smoke test
 ```
+
+For score lists with a few extreme outlier runs, `winsorized_mean` in
+`eval_harness.stats` clamps values to a percentile band before averaging,
+so one bad run still counts without dragging the reported mean.
