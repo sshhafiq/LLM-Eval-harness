@@ -17,6 +17,7 @@ library:
 - :func:`population_variance` — variance of one list, denominator n.
 - :func:`root_mean_square` — square root of the mean of squared values.
 - :func:`winsorized_mean` — mean after clamping extreme values to percentiles.
+- :func:`skewness` — asymmetry of one score list around its mean.
 """
 
 from __future__ import annotations
@@ -392,6 +393,27 @@ def winsorized_mean(values: Sequence[float], proportion: float = 0.1) -> float:
     high = percentile(values, (1.0 - proportion) * 100.0)
     clamped = [min(max(v, low), high) for v in values]
     return float(statistics.mean(clamped))
+
+
+def skewness(values: Sequence[float]) -> float:
+    """Skewness of ``values``: the population moment ratio m3 / m2 ** 1.5.
+
+    Positive values mean a long right tail (a few unusually high runs),
+    negative values a long left tail, and 0.0 a symmetric list. A single
+    value, or a constant list, has no spread to be asymmetric, so it
+    returns 0.0.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if len(values) == 1:
+        return 0.0
+    mean = statistics.mean(values)
+    m2 = statistics.mean((v - mean) ** 2 for v in values)
+    if m2 == 0.0:
+        return 0.0
+    m3 = statistics.mean((v - mean) ** 3 for v in values)
+    return float(m3 / (m2 ** 1.5))
 
 
 def summarize(values: Sequence[float]) -> dict:
