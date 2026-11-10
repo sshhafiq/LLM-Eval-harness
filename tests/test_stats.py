@@ -349,3 +349,20 @@ def test_winsorized_mean_clamps_extreme_runs():
         winsorized_mean([])
     with pytest.raises(ValueError):
         winsorized_mean([1.0, 2.0], 0.5)
+
+
+def test_outlier_count_flags_values_outside_tukey_fences():
+    from eval_harness.stats import outlier_count
+
+    # Q1 2.25, Q3 4.75, IQR 2.5, so the fences are -1.5 and 8.5:
+    # only the 100 is outside.
+    assert outlier_count([1.0, 2.0, 3.0, 4.0, 5.0, 100.0]) == 1
+    assert outlier_count([1.0, 2.0, 3.0, 4.0, 5.0]) == 0
+    # A wider fence admits the same point.
+    assert outlier_count([1.0, 2.0, 3.0, 4.0, 5.0, 100.0], k=50.0) == 0
+    assert outlier_count([5.0]) == 0
+    assert outlier_count([2.0, 2.0, 2.0]) == 0
+    with pytest.raises(ValueError):
+        outlier_count([])
+    with pytest.raises(ValueError):
+        outlier_count([1.0, 2.0], k=0.0)
