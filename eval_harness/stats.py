@@ -18,6 +18,7 @@ library:
 - :func:`root_mean_square` — square root of the mean of squared values.
 - :func:`winsorized_mean` — mean after clamping extreme values to percentiles.
 - :func:`skewness` — asymmetry of one score list around its mean.
+- :func:`outlier_count` — values outside the Tukey IQR fences of one list.
 """
 
 from __future__ import annotations
@@ -435,6 +436,28 @@ def kurtosis(values: Sequence[float]) -> float:
         return 0.0
     m4 = statistics.mean((v - mean) ** 4 for v in values)
     return float(m4 / (m2 ** 2) - 3.0)
+
+
+def outlier_count(values: Sequence[float], k: float = 1.5) -> int:
+    """Count of ``values`` outside the Tukey fences Q1 - k*IQR, Q3 + k*IQR.
+
+    The usual quick check for how many runs in a score list look like
+    outliers rather than ordinary spread. ``k`` is the fence width in
+    IQRs (1.5 is the standard box-plot rule) and must be positive. A
+    constant list has IQR 0, so its fences sit on the value itself and
+    nothing counts as an outlier.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if k <= 0:
+        raise ValueError("k must be positive")
+    q1 = percentile(values, 25)
+    q3 = percentile(values, 75)
+    spread = q3 - q1
+    low = q1 - k * spread
+    high = q3 + k * spread
+    return sum(1 for v in values if v < low or v > high)
 
 
 def summarize(values: Sequence[float]) -> dict:
