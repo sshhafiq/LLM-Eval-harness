@@ -460,6 +460,26 @@ def outlier_count(values: Sequence[float], k: float = 1.5) -> int:
     return sum(1 for v in values if v < low or v > high)
 
 
+def outlier_values(values: Sequence[float], k: float = 1.5) -> list[float]:
+    """The values themselves outside the Tukey fences used by outlier_count.
+
+    Returns them in input order, so a caller can see which runs were
+    flagged instead of only how many. ``k`` follows the same rule as
+    in :func:`outlier_count` and must be positive.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if k <= 0:
+        raise ValueError("k must be positive")
+    q1 = percentile(values, 25)
+    q3 = percentile(values, 75)
+    spread = q3 - q1
+    low = q1 - k * spread
+    high = q3 + k * spread
+    return [v for v in values if v < low or v > high]
+
+
 def summarize(values: Sequence[float]) -> dict:
     """Mean, median, standard deviation, min, max, and count for a score list."""
     values = list(values)
