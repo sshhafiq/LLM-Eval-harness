@@ -366,3 +366,20 @@ def test_outlier_count_flags_values_outside_tukey_fences():
         outlier_count([])
     with pytest.raises(ValueError):
         outlier_count([1.0, 2.0], k=0.0)
+
+
+def test_outlier_values_returns_flagged_values_in_input_order():
+    from eval_harness.stats import outlier_count, outlier_values
+
+    # Same fences as the outlier_count test: -1.5 and 8.5.
+    assert outlier_values([1.0, 2.0, 3.0, 4.0, 5.0, 100.0]) == [100.0]
+    assert outlier_values([1.0, 2.0, 3.0, 4.0, 5.0]) == []
+    # Low and high outliers both come back, in the order they appeared.
+    vals = [-50.0, 1.0, 2.0, 3.0, 4.0, 5.0, 100.0]
+    assert outlier_values(vals) == [-50.0, 100.0]
+    assert len(outlier_values(vals)) == outlier_count(vals)
+    assert outlier_values([1.0, 2.0, 3.0, 4.0, 5.0, 100.0], k=50.0) == []
+    with pytest.raises(ValueError):
+        outlier_values([])
+    with pytest.raises(ValueError):
+        outlier_values([1.0, 2.0], k=0.0)
