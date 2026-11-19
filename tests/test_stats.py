@@ -383,3 +383,18 @@ def test_outlier_values_returns_flagged_values_in_input_order():
         outlier_values([])
     with pytest.raises(ValueError):
         outlier_values([1.0, 2.0], k=0.0)
+
+
+def test_outlier_share_is_the_flagged_fraction():
+    from eval_harness.stats import outlier_count, outlier_share
+
+    vals = [1.0, 2.0, 3.0, 4.0, 5.0, 100.0]
+    assert outlier_share(vals) == pytest.approx(outlier_count(vals) / len(vals))
+    assert outlier_share(vals) == pytest.approx(1 / 6)
+    assert outlier_share([1.0, 2.0, 3.0, 4.0, 5.0]) == pytest.approx(0.0)
+    assert outlier_share(vals, k=50.0) == pytest.approx(0.0)
+    assert outlier_share([5.0]) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        outlier_share([])
+    with pytest.raises(ValueError):
+        outlier_share([1.0, 2.0], k=0.0)
