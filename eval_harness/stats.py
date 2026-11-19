@@ -493,3 +493,17 @@ def summarize(values: Sequence[float]) -> dict:
         "max": max(values),
         "n": len(values),
     }
+
+
+def outlier_share(values: Sequence[float], k: float = 1.5) -> float:
+    """Fraction of ``values`` outside the Tukey fences used by outlier_count.
+
+    The share form of :func:`outlier_count`: 0.0 when nothing is flagged
+    and 1.0 when every value sits outside the fences, so runs of
+    different sizes can be compared directly. ``k`` follows the same
+    rule as in :func:`outlier_count` and must be positive.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return outlier_count(values, k=k) / len(values)
