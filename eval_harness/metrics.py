@@ -233,6 +233,25 @@ def token_f1(prediction: str, reference: str) -> MetricResult:
     )
 
 
+def contains_match(prediction: str, reference: str) -> MetricResult:
+    """1.0 if the normalized reference appears inside the prediction.
+
+    Useful for short-answer QA where a correct model often embeds the
+    answer in a longer sentence ("The capital is Paris." vs "Paris"),
+    which exact match would score 0.  An empty reference scores 0.0 —
+    there is nothing to contain — unless the prediction is empty too.
+    """
+    p_norm, r_norm = normalize(prediction), normalize(reference)
+    if not r_norm:
+        score = 1.0 if not p_norm else 0.0
+        return MetricResult(name="contains_match", score=score,
+                            details={"contained": bool(score)})
+    contained = r_norm in p_norm
+    return MetricResult(name="contains_match",
+                        score=1.0 if contained else 0.0,
+                        details={"contained": contained})
+
+
 def json_validity(prediction: str, reference: str) -> MetricResult:
     """1.0 if ``prediction`` parses as JSON, else 0.0.
 
@@ -346,3 +365,4 @@ register_metric("bleu", _FnMetric("bleu", bleu))
 register_metric("json_validity", _FnMetric("json_validity", json_validity))
 register_metric("length_stats", _FnMetric("length_stats", length_stats))
 register_metric("token_f1", _FnMetric("token_f1", token_f1))
+register_metric("contains_match", _FnMetric("contains_match", contains_match))
