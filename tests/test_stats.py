@@ -398,3 +398,17 @@ def test_outlier_share_is_the_flagged_fraction():
         outlier_share([])
     with pytest.raises(ValueError):
         outlier_share([1.0, 2.0], k=0.0)
+
+
+def test_percentile_rank_is_the_share_at_or_below_a_score():
+    from eval_harness.stats import percentile_rank
+
+    vals = [1.0, 2.0, 3.0, 4.0, 5.0]
+    assert percentile_rank(vals, 0.5) == pytest.approx(0.0)
+    assert percentile_rank(vals, 3.0) == pytest.approx(0.6)
+    assert percentile_rank(vals, 5.0) == pytest.approx(1.0)
+    assert percentile_rank(vals, 100.0) == pytest.approx(1.0)
+    assert percentile_rank([5.0], 5.0) == pytest.approx(1.0)
+    assert percentile_rank([5.0], 4.0) == pytest.approx(0.0)
+    with pytest.raises(ValueError):
+        percentile_rank([], 1.0)
