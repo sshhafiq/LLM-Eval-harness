@@ -19,6 +19,7 @@ library:
 - :func:`winsorized_mean` — mean after clamping extreme values to percentiles.
 - :func:`skewness` — asymmetry of one score list around its mean.
 - :func:`outlier_count` — values outside the Tukey IQR fences of one list.
+- :func:`percentile_rank` — share of values at or below a given score.
 """
 
 from __future__ import annotations
@@ -507,3 +508,17 @@ def outlier_share(values: Sequence[float], k: float = 1.5) -> float:
     if not values:
         raise ValueError("values must be non-empty")
     return outlier_count(values, k=k) / len(values)
+
+
+def percentile_rank(values: Sequence[float], score: float) -> float:
+    """Share of ``values`` that are at or below ``score``.
+
+    The rank form of :func:`percentile`: 0.0 when ``score`` is below
+    every value, 1.0 when it is at or above every value, and 0.5 when
+    it sits at the median of a symmetric list. Handy for reporting
+    where a single run landed inside a baseline distribution.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    return sum(1 for v in values if v <= score) / len(values)
