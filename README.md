@@ -138,3 +138,35 @@ python examples/run_example.py   # end-to-end smoke test
 For score lists with a few extreme outlier runs, `winsorized_mean` in
 `eval_harness.stats` clamps values to a percentile band before averaging,
 so one bad run still counts without dragging the reported mean.
+
+## Temporal integration (`eval_harness.temporal`)
+
+For suites too large to tie to one process, `eval_harness.temporal`
+runs them as durable Temporal workflows:
+
+```
+EvalSuiteWorkflow (parent)
+  └─ BenchmarkWorkflow (child, one per benchmark)
+       ├─ run_benchmark_shard activities, fanned out in parallel
+       │    (each shard = run_experiment over a slice of examples,
+       │     scored by the metric registry)
+       └─ aggregate_benchmark activity
+            (means + stats.summarize + bootstrap CI for the primary
+             metric — randomized stats live in an activity, never in
+             deterministic workflow code)
+```
+
+Children keep every benchmark's history small and independently
+retryable; a crashed worker loses nothing, and progress per benchmark
+is visible in the Temporal UI.
+
+```bash
+pip install "llm-eval-harness[temporal]"
+docker compose up -d                       # local Temporal + UI (:8080)
+python -m eval_harness.temporal.worker worker
+python -m eval_harness.temporal.worker demo
+```
+
+Models are referenced by name (`echo` / `reverse` / `constant`
+built-ins) and resolved inside activities via a model-factory seam, so
+real model clients plug in without changing the workflows.
