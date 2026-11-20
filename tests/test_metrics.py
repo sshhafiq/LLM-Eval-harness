@@ -8,6 +8,7 @@ from eval_harness.metrics import (
     MetricResult,
     MockJudge,
     bleu,
+    contains_match,
     exact_match,
     get_metric,
     json_validity,
@@ -223,3 +224,26 @@ class TestTokenF1:
     def test_registered_as_builtin(self):
         assert "token_f1" in list_metrics()
         assert get_metric("token_f1").name == "token_f1"
+
+
+class TestContainsMatch:
+    def test_answer_embedded_in_sentence(self):
+        result = contains_match("The capital is Paris.", "Paris")
+        assert result.score == 1.0
+        assert result.details["contained"] is True
+
+    def test_missing_answer_is_zero(self):
+        result = contains_match("The capital is London.", "Paris")
+        assert result.score == 0.0
+        assert result.details["contained"] is False
+
+    def test_normalizes_case_and_punctuation(self):
+        assert contains_match("Answer: PARIS!", "paris").score == 1.0
+
+    def test_empty_reference(self):
+        assert contains_match("", "").score == 1.0
+        assert contains_match("some text", "").score == 0.0
+
+    def test_registered_as_builtin(self):
+        assert "contains_match" in list_metrics()
+        assert get_metric("contains_match").name == "contains_match"
