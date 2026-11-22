@@ -113,6 +113,13 @@ class ExperimentResult:
         return sum(1 for r in self.example_results if r.error is not None)
 
     @property
+    def error_rate(self) -> float:
+        """Fraction of examples that errored (0.0 when there are none)."""
+        if not self.example_results:
+            return 0.0
+        return self.n_errors / len(self.example_results)
+
+    @property
     def mean_latency_s(self) -> float:
         if not self.example_results:
             return 0.0
