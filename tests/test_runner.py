@@ -114,3 +114,25 @@ def test_parallel_matches_serial():
         metrics=metrics, num_workers=8,
     )
     assert serial.aggregate() == pytest.approx(parallel.aggregate())
+
+
+def test_error_rate_counts_failed_examples():
+    result = run_experiment(
+        FailingModel(),
+        model_name="fail",
+        dataset=_examples(),
+        dataset_name="test",
+        metrics=[get_metric("exact_match")],
+    )
+    assert result.error_rate == pytest.approx(1.0)
+
+
+def test_error_rate_zero_for_clean_run():
+    result = run_experiment(
+        EchoModel(),
+        model_name="echo",
+        dataset=_examples(),
+        dataset_name="test",
+        metrics=[get_metric("exact_match")],
+    )
+    assert result.error_rate == 0.0
