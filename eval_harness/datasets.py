@@ -94,6 +94,18 @@ def sample(examples: List[Example], n: int, seed: int = 42) -> List[Example]:
     return rng.sample(examples, min(n, len(examples)))
 
 
+def filter_by_metadata(
+    examples: List[Example], key: str, value: object
+) -> List[Example]:
+    """Return the examples whose ``metadata[key]`` equals ``value``.
+
+    Examples without ``key`` in their metadata never match, so filtering
+    on an optional tag cleanly selects only the examples that carry it.
+    Input order is preserved and the input list is not mutated.
+    """
+    return [e for e in examples if key in e.metadata and e.metadata[key] == value]
+
+
 def train_test_split(
     examples: List[Example], test_size: float = 0.2, seed: int = 42
 ) -> tuple[List[Example], List[Example]]:
