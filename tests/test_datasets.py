@@ -128,3 +128,18 @@ def test_split_bad_size(tmp_path):
         train_test_split(examples, test_size=0.0)
     with pytest.raises(ValueError):
         train_test_split(examples, test_size=1.5)
+
+
+def test_filter_by_metadata_selects_matching_only(tmp_path):
+    from eval_harness.datasets import filter_by_metadata
+
+    lines = "\n".join([
+        '{"id": "a", "input": "q", "reference": "r", "metadata": {"topic": "math"}}',
+        '{"id": "b", "input": "q", "reference": "r", "metadata": {"topic": "geo"}}',
+        '{"id": "c", "input": "q", "reference": "r"}',
+    ])
+    examples = load_jsonl(_write(tmp_path, lines + "\n"))
+    picked = filter_by_metadata(examples, "topic", "math")
+    assert [e.id for e in picked] == ["a"]
+    assert filter_by_metadata(examples, "topic", "history") == []
+    assert len(examples) == 3
