@@ -94,3 +94,10 @@ def test_compare_ignores_unshared_metrics(registry):
     base_id, cur_id = _two_runs(registry, {"a": 0.9, "b": 0.9}, {"a": 0.1})
     regressions = registry.compare(cur_id, base_id, threshold=0.02)
     assert [r.metric for r in regressions] == ["a"]
+
+
+def test_count_runs_tracks_recorded_runs(registry):
+    assert registry.count_runs() == 0
+    registry.record_run(name="a", model="m", dataset="d", aggregate={"x": 1.0})
+    registry.record_run(name="b", model="m", dataset="d", aggregate={"x": 2.0})
+    assert registry.count_runs() == 2
