@@ -27,6 +27,14 @@ svg.chart { display: block; margin: 1rem 0; }
 """
 
 
+def best_label(labels: Sequence[str], values: Sequence[float]) -> str | None:
+    """Return the label paired with the highest value, or None if empty."""
+    pairs = list(zip(labels, values))
+    if not pairs:
+        return None
+    return str(max(pairs, key=lambda pair: float(pair[1]))[0])
+
+
 def svg_bar_chart(
     title: str,
     labels: Sequence[str],
