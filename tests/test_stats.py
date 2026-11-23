@@ -412,3 +412,25 @@ def test_percentile_rank_is_the_share_at_or_below_a_score():
     assert percentile_rank([5.0], 4.0) == pytest.approx(0.0)
     with pytest.raises(ValueError):
         percentile_rank([], 1.0)
+
+
+def test_share_within_is_the_fraction_inside_the_band():
+    from eval_harness.stats import share_within
+
+    vals = [1.0, 2.0, 3.0, 4.0, 5.0]
+    assert share_within(vals, 2.0, 4.0) == pytest.approx(0.6)
+    assert share_within(vals, 0.0, 10.0) == pytest.approx(1.0)
+    assert share_within(vals, 6.0, 9.0) == pytest.approx(0.0)
+    assert share_within(vals, 3.0, 3.0) == pytest.approx(0.2)
+    assert share_within([5.0], 5.0, 5.0) == pytest.approx(1.0)
+    with pytest.raises(ValueError):
+        share_within([], 0.0, 1.0)
+    with pytest.raises(ValueError):
+        share_within(vals, 4.0, 2.0)
+
+
+def test_share_above_counts_strictly_greater_values():
+    from eval_harness.stats import share_above
+    assert share_above([1.0, 2.0, 3.0, 4.0], 2.0) == 0.5
+    assert share_above([1.0, 2.0], 5.0) == 0.0
+    assert share_above([], 1.0) == 0.0
