@@ -88,6 +88,19 @@ def list_metrics() -> list[str]:
     return sorted(_METRICS)
 
 
+def mean_score(results) -> float:
+    """Mean of the ``score`` fields in ``results``, or 0.0 when empty.
+
+    A small aggregation helper for callers that run one metric over many
+    examples and want the headline number without re-implementing the
+    empty-case handling each time.
+    """
+    scores = [r.score for r in results]
+    if not scores:
+        return 0.0
+    return sum(scores) / len(scores)
+
+
 # ---------------------------------------------------------------------------
 # Text helpers
 # ---------------------------------------------------------------------------
@@ -233,6 +246,28 @@ def token_f1(prediction: str, reference: str) -> MetricResult:
     )
 
 
+def jaccard_similarity(prediction: str, reference: str) -> MetricResult:
+    """Jaccard similarity over the normalized token sets.
+
+    Unlike :func:`token_f1`, duplicates do not count: the score is the
+    size of the token-set intersection over the size of the union, so
+    it measures vocabulary overlap rather than bag-of-words overlap.
+    Empty on both sides scores 1.0; empty on exactly one side scores
+    0.0.
+    """
+    p_set = set(normalize(prediction).split())
+    r_set = set(normalize(reference).split())
+    if not p_set and not r_set:
+        return MetricResult(name="jaccard_similarity", score=1.0,
+                            details={"intersection": 0, "union": 0})
+    union = p_set | r_set
+    inter = p_set & r_set
+    return MetricResult(
+        name="jaccard_similarity", score=len(inter) / len(union),
+        details={"intersection": len(inter), "union": len(union)},
+    )
+
+
 def contains_match(prediction: str, reference: str) -> MetricResult:
     """1.0 if the normalized reference appears inside the prediction.
 
@@ -366,3 +401,4 @@ register_metric("json_validity", _FnMetric("json_validity", json_validity))
 register_metric("length_stats", _FnMetric("length_stats", length_stats))
 register_metric("token_f1", _FnMetric("token_f1", token_f1))
 register_metric("contains_match", _FnMetric("contains_match", contains_match))
+register_metric("jaccard_similarity", _FnMetric("jaccard_similarity", jaccard_similarity))
