@@ -4,7 +4,7 @@ import pytest
 
 from eval_harness.datasets import Example
 from eval_harness.metrics import get_metric
-from eval_harness.report import generate_html_report, svg_bar_chart
+from eval_harness.report import best_label, generate_html_report, svg_bar_chart
 from eval_harness.runner import ConstantModel, run_experiment
 
 
@@ -70,3 +70,11 @@ def test_report_multiple_models(tmp_path):
 def test_report_empty_raises(tmp_path):
     with pytest.raises(ValueError):
         generate_html_report([], tmp_path / "r.html")
+
+
+def test_best_label_picks_highest_value():
+    assert best_label(["a", "b", "c"], [0.2, 0.9, 0.4]) == "b"
+
+
+def test_best_label_empty_returns_none():
+    assert best_label([], []) is None
