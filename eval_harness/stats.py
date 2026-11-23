@@ -522,3 +522,26 @@ def percentile_rank(values: Sequence[float], score: float) -> float:
     if not values:
         raise ValueError("values must be non-empty")
     return sum(1 for v in values if v <= score) / len(values)
+
+
+def share_within(values: Sequence[float], low: float, high: float) -> float:
+    """Share of ``values`` inside the inclusive range [``low``, ``high``].
+
+    Handy for pass-band reporting: what fraction of runs landed between
+    a floor and a ceiling score. 0.0 when nothing falls in the band and
+    1.0 when everything does. ``low`` must not exceed ``high``.
+    """
+    values = list(values)
+    if not values:
+        raise ValueError("values must be non-empty")
+    if low > high:
+        raise ValueError("low must not exceed high")
+    return sum(1 for v in values if low <= v <= high) / len(values)
+
+
+def share_above(values: Sequence[float], threshold: float) -> float:
+    """Share of values strictly above ``threshold`` (0.0 for empty input)."""
+    values = list(values)
+    if not values:
+        return 0.0
+    return sum(1 for v in values if v > threshold) / len(values)
