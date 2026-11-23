@@ -147,6 +147,11 @@ class RunRegistry:
         ).fetchall()
         return [self.get_run(r["id"]) for r in rows]
 
+    def count_runs(self) -> int:
+        """Total number of runs recorded in the registry."""
+        row = self._conn.execute("SELECT COUNT(*) AS n FROM runs").fetchone()
+        return int(row["n"])
+
     def find_run(self, name: str) -> RunRecord:
         """Fetch the most recent run with the given name; KeyError if none."""
         row = self._conn.execute(
