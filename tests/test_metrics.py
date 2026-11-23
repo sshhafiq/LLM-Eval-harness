@@ -11,10 +11,12 @@ from eval_harness.metrics import (
     contains_match,
     exact_match,
     get_metric,
+    jaccard_similarity,
     json_validity,
     length_stats,
     list_metrics,
     llm_judge_metric,
+    mean_score,
     normalize,
     register_metric,
     rouge_l,
@@ -247,3 +249,40 @@ class TestContainsMatch:
     def test_registered_as_builtin(self):
         assert "contains_match" in list_metrics()
         assert get_metric("contains_match").name == "contains_match"
+
+
+class TestJaccardSimilarity:
+    def test_identical_text_scores_one(self):
+        result = jaccard_similarity("the cat sat", "the cat sat")
+        assert result.score == 1.0
+        assert result.details == {"intersection": 3, "union": 3}
+
+    def test_partial_overlap(self):
+        result = jaccard_similarity("the cat sat", "the dog sat")
+        assert result.score == pytest.approx(2 / 4)
+        assert result.details["intersection"] == 2
+        assert result.details["union"] == 4
+
+    def test_duplicates_do_not_count(self):
+        assert jaccard_similarity("cat cat cat", "cat").score == 1.0
+
+    def test_no_overlap_and_empty(self):
+        assert jaccard_similarity("aaa bbb", "ccc ddd").score == 0.0
+        assert jaccard_similarity("", "").score == 1.0
+        assert jaccard_similarity("", "some words").score == 0.0
+
+    def test_registered_as_builtin(self):
+        assert "jaccard_similarity" in list_metrics()
+        assert get_metric("jaccard_similarity").name == "jaccard_similarity"
+
+
+class TestMeanScore:
+    def test_average_of_scores(self):
+        results = [MetricResult(name="m", score=1.0), MetricResult(name="m", score=0.5), MetricResult(name="m", score=0.0)]
+        assert mean_score(results) == pytest.approx(0.5)
+
+    def test_empty_is_zero(self):
+        assert mean_score([]) == 0.0
+
+    def test_single_result(self):
+        assert mean_score([exact_match("Paris", "Paris")]) == 1.0
