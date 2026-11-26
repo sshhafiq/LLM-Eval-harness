@@ -105,3 +105,14 @@ def test_compare_command_clean(tmp_path):
     )
     assert result.exit_code == 0, result.output
     assert "No regressions" in result.output
+
+
+def test_parse_metric_names_splits_and_strips():
+    from eval_harness.cli import parse_metric_names
+
+    assert parse_metric_names("exact_match, rouge_l ,, bleu") == [
+        "exact_match",
+        "rouge_l",
+        "bleu",
+    ]
+    assert parse_metric_names("") == []
