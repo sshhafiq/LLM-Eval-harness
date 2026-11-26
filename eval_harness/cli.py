@@ -44,6 +44,11 @@ def _build_model(name: str, constant_text: str) -> ModelFn:
 MODEL_CHOICES = ["echo", "reverse", "constant"]
 
 
+def parse_metric_names(text: str) -> List[str]:
+    """Split a comma-separated --metrics value into clean metric names."""
+    return [m.strip() for m in text.split(",") if m.strip()]
+
+
 @click.group()
 def harness() -> None:
     """LLM eval harness: benchmark model outputs with pluggable metrics."""
@@ -85,7 +90,7 @@ def run_command(
     no_record: bool,
 ) -> None:
     """Run one model over a dataset and score it with the given metrics."""
-    metric_names = [m.strip() for m in metrics.split(",") if m.strip()]
+    metric_names = parse_metric_names(metrics)
     try:
         metric_fns: List[Metric] = [get_metric(m) for m in metric_names]
     except KeyError as exc:
